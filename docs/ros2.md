@@ -11,6 +11,7 @@ python3 -m pip install --target "$HOME/.local/p3-sdk" .
 export PYTHONPATH="$HOME/.local/p3-sdk:$PYTHONPATH"
 colcon build --base-paths ros2
 . install/setup.bash
+export PYTHONPATH="$HOME/.local/p3-sdk:$PYTHONPATH"
 ros2 launch thermalmaster_p3_ros p3.launch.py
 ```
 

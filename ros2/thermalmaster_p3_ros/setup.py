@@ -8,6 +8,7 @@ setup(
                 ('share/thermalmaster_p3_ros/launch', ['launch/p3.launch.py'])],
     install_requires=['setuptools', 'unofficial-thermalmaster-p3>=0.1.0,<0.2'],
     zip_safe=True, license='Apache-2.0',
+    tests_require=['pytest'],
     description='Independent Thermal Master P3 ROS 2 driver',
     maintainer='Unofficial P3 SDK contributors', maintainer_email='maintainers@example.invalid',
     entry_points={'console_scripts': ['p3_node = thermalmaster_p3_ros.node:main']},

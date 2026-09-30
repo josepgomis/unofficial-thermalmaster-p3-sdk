@@ -49,6 +49,8 @@ jobs:
           export PYTHONPATH=/opt/p3-sdk:$PYTHONPATH
           colcon build --base-paths ros2 --event-handlers console_direct+
           source install/setup.bash
+          export PYTHONPATH=/opt/p3-sdk:$PYTHONPATH
+          python3 -c "import thermalmaster_p3; print(thermalmaster_p3.__file__)"
           colcon test --packages-select thermalmaster_p3_ros --event-handlers console_direct+
           colcon test-result --verbose
       - name: rosbag2 simulated capture smoke test
@@ -57,4 +59,5 @@ jobs:
           source /opt/ros/$ROS_DISTRO/setup.bash
           export PYTHONPATH=/opt/p3-sdk:$PYTHONPATH
           source install/setup.bash
+          export PYTHONPATH=/opt/p3-sdk:$PYTHONPATH
           python3 ros2/thermalmaster_p3_ros/test/rosbag_smoke.py
