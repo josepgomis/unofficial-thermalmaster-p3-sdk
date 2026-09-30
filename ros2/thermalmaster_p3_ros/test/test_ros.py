@@ -7,6 +7,7 @@ from sensor_msgs.msg import Image
 from std_msgs.msg import Header
 from std_srvs.srv import Trigger
 from rclpy.qos import qos_profile_sensor_data
+from rclpy.parameter import Parameter
 
 import thermalmaster_p3_ros.node as module
 from thermalmaster_p3.frame import Frame
@@ -27,11 +28,12 @@ def test_fake_camera_topics_and_nuc(monkeypatch):
     class FakeCamera:
         def __init__(self, **kwargs):
             self.parser, self.timeouts = FrameParser(), 0
+            self.gain, self.nuc_calls = None, 0
         def open(self): pass
         def start(self): pass
-        def set_gain(self, gain): pass
+        def set_gain(self, gain): self.gain = gain
         def close(self): pass
-        def trigger_nuc(self): pass
+        def trigger_nuc(self): self.nuc_calls += 1
         def read_frame(self, timeout):
             return Frame(np.full((192, 256), 19082, np.uint16),
                          np.zeros((192, 256), np.uint8), np.zeros((2, 256), np.uint16),
@@ -53,9 +55,19 @@ def test_fake_camera_topics_and_nuc(monkeypatch):
             executor.spin_once(timeout_sec=.1)
         assert len(received) == 3
         assert {received[k].encoding for k in received} == {'16UC1', '32FC1', 'mono8'}
+        headers = [received[k].header for k in received]
+        assert all(header == headers[0] for header in headers)
+        temperatures = np.frombuffer(received['temperature'].data, dtype='<f4')
+        assert np.allclose(temperatures, 19082 / 64 - 273.15, atol=.001)
         # The zero-latency fake has no USB pacing. Stop it before testing the
         # service so legacy executors cannot starve service discovery with images.
         node.capture_timer.cancel()
+        assert node.set_parameters([Parameter('gain', value='low')])[0].successful
+        assert node.camera.gain == 'low'
+        assert node.set_parameters([Parameter('timeout', value=.2)])[0].successful
+        assert not node.set_parameters([Parameter('timeout', value=-1.)])[0].successful
+        assert not node.set_parameters([Parameter('gain', value='invalid')])[0].successful
+        assert not node.set_parameters([Parameter('path', value='1:2')])[0].successful
         client = observer.create_client(Trigger, 'thermal/trigger_nuc')
         assert client.wait_for_service(timeout_sec=3)
         future = client.call_async(Trigger.Request())
@@ -64,6 +76,7 @@ def test_fake_camera_topics_and_nuc(monkeypatch):
             executor.spin_once(timeout_sec=.1)
         assert future.done(), 'NUC service did not respond'
         assert future.result().success
+        assert node.camera.nuc_calls == 1
     finally:
         executor.shutdown()
         observer.destroy_node()
