@@ -62,7 +62,10 @@ def main():
             while time.monotonic() < deadline:
                 executor.spin_once(timeout_sec=.1)
             stop(record)
-            assert record.returncode == 0, 'Recorder failed'
+            # Older ros2 CLI wrappers propagate SIGINT instead of returning 0.
+            # Validate the finalized bag and actual playback below as well.
+            assert record.returncode in (0, -signal.SIGINT, 128 + signal.SIGINT), (
+                'Recorder failed with exit code ' + str(record.returncode))
             executor.remove_node(node)
             node.destroy_node()
             node = None
