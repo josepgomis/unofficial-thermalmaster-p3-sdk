@@ -1,0 +1,12 @@
+Unofficial Thermal Master P3 SDK
+Copyright 2026 Unofficial Thermal Master P3 SDK contributors
+
+This project is independent and is not affiliated with or endorsed by Thermal Master.
+All product names and trademarks belong to their respective owners.
+
+Protocol research reference:
+jvdillon/p3-ir-camera, P3_PROTOCOL.md, and its contributors including aeternium.
+https://github.com/jvdillon/p3-ir-camera/blob/main/P3_PROTOCOL.md
+The referenced project is licensed under Apache-2.0.
+This SDK implements the documented protocol independently; it does not bundle
+the upstream Python driver, vendor software, or firmware.

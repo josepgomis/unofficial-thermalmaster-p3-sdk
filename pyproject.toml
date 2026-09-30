@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61,<77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "unofficial-thermalmaster-p3"
+version = "0.1.0"
+description = "Independent radiometric Thermal Master P3 SDK for Python and robotics"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "Apache-2.0"}
+dependencies = ["numpy>=1.21", "pyusb>=1.2", "libusb-package>=1.0; sys_platform == 'win32'"]
+classifiers = ["Development Status :: 3 - Alpha", "Programming Language :: Python :: 3", "Operating System :: Microsoft :: Windows", "Operating System :: POSIX :: Linux"]
+
+[project.optional-dependencies]
+viewer = ["opencv-python>=4.5"]
+dev = ["pytest>=7", "build", "twine"]
+
+[project.scripts]
+p3 = "thermalmaster_p3.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+thermalmaster_p3 = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,21 @@
+name: Bug report
+description: Report SDK, USB, viewer or ROS problems
+body:
+  - type: textarea
+    attributes:
+      label: Environment
+      description: OS, architecture, Python, SDK version, P3 firmware, USB driver and ROS distribution if applicable.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Reproduction and expected behavior
+      description: Include the smallest example and command output. Remove serial numbers or other private details.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Actual behavior and diagnostics
+      description: Include p3 devices/info output and diagnostic counters if available.
+    validations:
+      required: true
