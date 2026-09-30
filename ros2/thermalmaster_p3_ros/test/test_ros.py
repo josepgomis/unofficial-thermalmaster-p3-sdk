@@ -53,10 +53,16 @@ def test_fake_camera_topics_and_nuc(monkeypatch):
             executor.spin_once(timeout_sec=.1)
         assert len(received) == 3
         assert {received[k].encoding for k in received} == {'16UC1', '32FC1', 'mono8'}
+        # The zero-latency fake has no USB pacing. Stop it before testing the
+        # service so legacy executors cannot starve service discovery with images.
+        node.capture_timer.cancel()
         client = observer.create_client(Trigger, 'thermal/trigger_nuc')
         assert client.wait_for_service(timeout_sec=3)
         future = client.call_async(Trigger.Request())
-        executor.spin_until_future_complete(future, timeout_sec=3)
+        deadline = time.monotonic() + 10
+        while not future.done() and time.monotonic() < deadline:
+            executor.spin_once(timeout_sec=.1)
+        assert future.done(), 'NUC service did not respond'
         assert future.result().success
     finally:
         executor.shutdown()
