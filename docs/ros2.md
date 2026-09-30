@@ -9,7 +9,7 @@ Use a venv with `--system-site-packages` and the same system Python as ROS. This
 sudo apt install libusb-1.0-0 python3-venv python3-pip python3-numpy python3-usb python3-yaml python3-colcon-common-extensions python3-setuptools python3-wheel
 python3 -m venv --system-site-packages .ros-venv
 . .ros-venv/bin/activate
-python -m pip install --upgrade 'pip>=23' 'setuptools>=61,<72' 'importlib-metadata>=4' wheel
+python -m pip install --upgrade 'pip>=23' 'setuptools>=61,<72' 'packaging>=24' 'importlib-metadata>=4' wheel
 python -m pip install --no-build-isolation .
 P3_SDK_SITE=$(python -c "import sysconfig; print(sysconfig.get_paths()['purelib'])")
 export PYTHONPATH="$P3_SDK_SITE:$PYTHONPATH"
