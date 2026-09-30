@@ -120,6 +120,19 @@ def test_rotation_maps_mouse_to_original_pixels(viewer_frame):
         _ViewerState(rotation=90)
 
 
+def test_failed_window_creation_releases_camera(viewer_frame, monkeypatch):
+    import cv2
+    from unittest.mock import MagicMock
+    from thermalmaster_p3.viewer import run_viewer
+    def fail(*args):
+        raise cv2.error('No GUI')
+    monkeypatch.setattr(cv2, 'namedWindow', fail)
+    camera = MagicMock()
+    with pytest.raises(OSError, match='interactive desktop'):
+        run_viewer(camera=camera)
+    camera.close.assert_called_once()
+
+
 @pytest.mark.parametrize('ending', ['finished', 'disconnected'])
 def test_viewer_final_states_and_cleanup(viewer_frame, monkeypatch, ending):
     import cv2

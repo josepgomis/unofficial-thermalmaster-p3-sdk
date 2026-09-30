@@ -201,7 +201,11 @@ def run_viewer(camera=None, frames=None, limits=None, source_label='REPLAY', rot
     writer, frame, previous_time = None, None, None
     status, message, ended, opened = 'WAITING', '', False, False
     try:
-        cv2.namedWindow(TITLE, cv2.WINDOW_AUTOSIZE)
+        try:
+            cv2.namedWindow(TITLE, cv2.WINDOW_AUTOSIZE)
+        except cv2.error as exc:
+            raise OSError('OpenCV window unavailable. Use an interactive desktop and opencv-python; '
+                          'headless acquisition can use p3 capture or p3 record.') from exc
         opened = True
         cv2.setMouseCallback(TITLE, state.mouse)
         cv2.imshow(TITLE, _compose(None, state, source, status))
