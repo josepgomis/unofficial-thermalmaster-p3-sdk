@@ -47,6 +47,14 @@ ros2 service call /thermal/trigger_nuc std_srvs/srv/Trigger '{}'
 
 ## rosbag2
 
+For adapter unit tests after building and sourcing the workspace:
+
+```sh
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python -m pytest -q ros2/thermalmaster_p3_ros/test
+```
+
+The tests drive rclpy directly. Disabling third-party pytest autoload prevents old distro `launch_testing` plugins from conflicting with modern pytest; those plugins are not used by these tests.
+
 ```sh
 ros2 bag record -o p3-run /thermal/raw /thermal/temperature /thermal/ir /thermal/camera_info /diagnostics
 ros2 bag info p3-run

@@ -58,6 +58,8 @@ jobs:
           source install/setup.bash
           export PYTHONPATH=$P3_SDK_SITE:$PYTHONPATH
           python3 -c "import thermalmaster_p3; print(thermalmaster_p3.__file__)"
+          # These tests use rclpy directly, not distro-specific launch_testing plugins.
+          export PYTEST_DISABLE_PLUGIN_AUTOLOAD=1
           python3 -m pytest -q ros2/thermalmaster_p3_ros/test
           colcon test --packages-select thermalmaster_p3_ros --event-handlers console_direct+
           colcon test-result --verbose
