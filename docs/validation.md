@@ -1,6 +1,6 @@
 # Validation status — 2026-09-30
 
-Results are specific to this checkout. CI workflows are configured but have not run on GitHub yet.
+Automated validation passed in [GitHub Actions run 36740280965](https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk/actions/runs/36740280965), code commit `0ca5b1c`. All 11 jobs succeeded. ROS tests use a simulated camera; they do not certify USB access or physical accuracy.
 
 | Area | Evidence | Status |
 | --- | --- | --- |
@@ -12,12 +12,13 @@ Results are specific to this checkout. CI workflows are configured but have not 
 | Clean install | Fresh Python 3.12 venv, wheel + NumPy 2.5.3 / PyUSB 1.3.1 / libusb-package 1.0.30.0 | Core import, conversion, recording/replay and CLI help passed |
 | Optional dependencies | Base import without OpenCV or ROS in clean venv | Passed |
 | Viewer | OpenCV 5.0.0.93 render, synthetic ROI/panel composition inspected | Rendering passed; interactive window/controls need real usage |
-| Python 3.8 | AST syntax check across SDK and ROS code | Passed syntax only; runtime CI pending |
+| Windows/Linux SDK | Python 3.8, 3.10, 3.12 and 3.13; unit tests, wheel/sdist, metadata and clean wheel smoke | All 8 CI jobs passed |
+| Python 3.8 | SDK runtime tests and Foxy Python 3.8.10 environment | Passed in CI |
 | Physical USB discovery | P3 `3474:45a2`, path `1:3` | Detected on Windows |
 | Physical capture | `p3 info` cannot claim usable interfaces; MI_00 has code 28 | Blocked by Windows driver setup |
 | 30-minute camera run | FPS, marker gaps, gain, NUC, unplug/replug | Pending USB access |
 | Linux x86_64 / ARM64 | No accessible Linux runtime in this session | Hardware tests pending |
-| ROS Foxy/Humble/Jazzy | Build, topic/service tests, rosbag2 smoke workflows included | Not run locally; CI pending |
+| ROS Foxy/Humble/Jazzy | Ubuntu 20.04/22.04/24.04 containers; colcon build/test; encodings, Celsius payload, shared headers, gain/timeout validation, NUC service; rosbag2 record/play | All 3 CI jobs passed with simulated camera |
 | Package name | PyPI JSON endpoint returned HTTP 404 on 2026-09-30 | Apparently unregistered; not reserved |
 
 ## Physical acceptance procedure

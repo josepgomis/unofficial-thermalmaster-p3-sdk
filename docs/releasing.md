@@ -1,6 +1,6 @@
 # Release checklist
 
-1. Create `josepgomis/unofficial-thermalmaster-p3-sdk` using the account selected by the owner. Set a real maintainer contact in the ROS manifest/setup before a tagged release.
+1. The public repository is `josepgomis/unofficial-thermalmaster-p3-sdk`. Set a real maintainer contact in the ROS manifest/setup before publishing the prepared draft as a tagged release.
 2. Run the complete SDK CI matrix and ROS jobs. Update `docs/validation.md` with actual results and hardware evidence; never change pending entries based only on mocks.
 3. Check package-name availability at `https://pypi.org/pypi/unofficial-thermalmaster-p3/json`. A 404 suggests no current project, but does not reserve the name or guarantee registry acceptance. This must be rechecked immediately before publication.
 4. Check dependency licenses and build `python -m build`; run `python -m twine check dist/*`. Install the wheel in a clean environment and follow the quick start.

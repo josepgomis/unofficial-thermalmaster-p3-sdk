@@ -1,6 +1,6 @@
 # ROS 2 integration
 
-Targets: Foxy/Ubuntu 20.04, Humble/22.04 and Jazzy/24.04. Foxy is a legacy target; its CI image and dependencies may require maintenance. These combinations have not been run locally. Linux hardware support, including ARM64, remains unverified.
+Targets: Foxy/Ubuntu 20.04, Humble/22.04 and Jazzy/24.04. All three passed container CI builds, topic/parameter/NUC tests and simulated-camera rosbag2 recording/playback; see the [validation report](validation.md). Foxy is a legacy target; its CI image and dependencies may require maintenance. Linux hardware support, including ARM64, remains unverified.
 
 Use a venv with `--system-site-packages` and the same system Python as ROS. This retains ROS modules, avoids modifying externally managed Python, and supplies a packaging backend that understands the SDK's pyproject metadata:
 

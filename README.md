@@ -82,7 +82,7 @@ python -m build
 python -m twine check dist/*
 ```
 
-CI is configured for Windows/Linux and Python 3.8, 3.10, 3.12 and 3.13. Separate ROS jobs build and run simulated-camera tests on Foxy, Humble and Jazzy. A configured workflow is not evidence that it has run; see the validation report.
+CI passed on Windows/Linux with Python 3.8, 3.10, 3.12 and 3.13. Foxy, Humble and Jazzy jobs passed colcon build/tests and simulated-camera rosbag2 recording/playback. See the [validation report](docs/validation.md) for evidence and the pending physical-camera checks.
 
 ## Attribution and license
 
