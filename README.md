@@ -35,11 +35,10 @@ The package is prepared for PyPI but is **not published yet**. After publication
 python -m pip install unofficial-thermalmaster-p3
 ```
 
-The chosen repository is `josepgomis/unofficial-thermalmaster-p3-sdk`. After it is uploaded and tagged, installation directly from GitHub will also be available:
+The public repository is [josepgomis/unofficial-thermalmaster-p3-sdk](https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk). Install directly from its current main branch:
 
 ```sh
-# Available after the repository and v0.1.0 tag have been published.
-python -m pip install "git+https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk.git@v0.1.0"
+python -m pip install "git+https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk.git@main"
 ```
 
 ## Viewer and recording

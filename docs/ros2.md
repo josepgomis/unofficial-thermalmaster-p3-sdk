@@ -7,7 +7,7 @@ Install the SDK into the Python environment used by ROS, not an unrelated virtua
 ```sh
 # Run from this repository after sourcing your ROS installation.
 sudo apt install python3-pip python3-numpy python3-usb python3-yaml python3-colcon-common-extensions python3-setuptools python3-wheel
-python3 -m pip install --no-deps --target "$HOME/.local/p3-sdk" .
+python3 -m pip install --target "$HOME/.local/p3-sdk" .
 export PYTHONPATH="$HOME/.local/p3-sdk:$PYTHONPATH"
 colcon build --base-paths ros2
 . install/setup.bash
