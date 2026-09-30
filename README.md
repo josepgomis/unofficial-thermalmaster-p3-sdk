@@ -71,6 +71,9 @@ Viewer controls: `q` quit, `p` palette, `a` auto/fixed scale, `c` clear ROI, `i`
 
 Download `p3-real-sample.zip` from the release, extract it, then run `p3 replay p3-real-sample --viewer`. It contains 30 actual P3 frames (about 1.6 MB compressed), original radiometry and a manifest without device serial identifiers. [Recording and sample instructions](docs/recording.md).
 
+<img width="2304" height="806" alt="image" src="https://github.com/user-attachments/assets/c595ee66-1a79-4905-b358-728dd05fce30" />
+
+
 ## ROS 2 and documentation
 
 - [ROS 2 setup, topics, calibration and rosbag2](docs/ros2.md)
