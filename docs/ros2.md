@@ -2,16 +2,20 @@
 
 Targets: Foxy/Ubuntu 20.04, Humble/22.04 and Jazzy/24.04. Foxy is a legacy target; its CI image and dependencies may require maintenance. These combinations have not been run locally. Linux hardware support, including ARM64, remains unverified.
 
-Install the SDK into the Python environment used by ROS, not an unrelated virtual environment. On Jazzy's externally managed Python, use a venv with `--system-site-packages` and matching system Python, or install the SDK into an explicit user target and add it to `PYTHONPATH`:
+Use a venv with `--system-site-packages` and the same system Python as ROS. This retains ROS modules, avoids modifying externally managed Python, and supplies a packaging backend that understands the SDK's pyproject metadata:
 
 ```sh
 # Run from this repository after sourcing your ROS installation.
-sudo apt install python3-pip python3-numpy python3-usb python3-yaml python3-colcon-common-extensions python3-setuptools python3-wheel
-python3 -m pip install --target "$HOME/.local/p3-sdk" .
-export PYTHONPATH="$HOME/.local/p3-sdk:$PYTHONPATH"
+sudo apt install libusb-1.0-0 python3-venv python3-pip python3-numpy python3-usb python3-yaml python3-colcon-common-extensions python3-setuptools python3-wheel
+python3 -m venv --system-site-packages .ros-venv
+. .ros-venv/bin/activate
+python -m pip install --upgrade 'pip>=23' 'setuptools>=61,<77' wheel
+python -m pip install --no-build-isolation .
+P3_SDK_SITE=$(python -c "import sysconfig; print(sysconfig.get_paths()['purelib'])")
+export PYTHONPATH="$P3_SDK_SITE:$PYTHONPATH"
 colcon build --base-paths ros2
 . install/setup.bash
-export PYTHONPATH="$HOME/.local/p3-sdk:$PYTHONPATH"
+export PYTHONPATH="$P3_SDK_SITE:$PYTHONPATH"
 ros2 launch thermalmaster_p3_ros p3.launch.py
 ```
 
