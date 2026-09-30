@@ -9,8 +9,15 @@ description = "Independent radiometric Thermal Master P3 SDK for Python and robo
 readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "Apache-2.0"}
+maintainers = [{name = "josepgomis", email = "josepgomis@users.noreply.github.com"}]
 dependencies = ["numpy>=1.21", "pyusb>=1.2", "libusb-package>=1.0; sys_platform == 'win32'"]
 classifiers = ["Development Status :: 3 - Alpha", "Programming Language :: Python :: 3", "Operating System :: Microsoft :: Windows", "Operating System :: POSIX :: Linux"]
+
+[project.urls]
+Homepage = "https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk"
+Documentation = "https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk#readme"
+Issues = "https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk/issues"
+Changelog = "https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
 viewer = ["opencv-python>=4.5"]

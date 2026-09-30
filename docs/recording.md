@@ -20,3 +20,24 @@ for frame in replay('sessions/run-01'):
 ```
 
 `p3 replay SESSION` validates and counts frames. Add `--viewer` for timed display. Playback waits use monotonic capture intervals, capped at 200 ms for responsiveness. It is a visualization replay, not real-time synchronization with other sensors. For ROS experiments, use rosbag2 to preserve ROS message timing and accompanying sensors.
+
+## Actual P3 sample
+
+Download `p3-real-sample.zip` from the [0.1.0 alpha release](https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk/releases). Extract it using your archive tool; the resulting directory is `p3-real-sample/`.
+
+```sh
+p3 replay p3-real-sample
+p3 replay p3-real-sample --viewer --rotate 180
+p3 replay p3-real-sample --viewer --rotate 180 --range 15 35
+```
+
+The sample contains 30 physical P3 frames, original raw/IR/metadata arrays, reception timestamps and a configuration manifest with model/firmware/gain. Device serial identifiers are excluded from the manifest. The display rotation accounts for the camera mounting; arrays stay in native sensor orientation. It is a demonstration of acquisition and replay, not a temperature calibration reference.
+
+```python
+from thermalmaster_p3.recording import replay
+
+for frame in replay("p3-real-sample"):
+    print(frame.sequence, float(frame.temperature_c.mean()))
+```
+
+PNG gallery exports and their acquisition provenance live in `docs/images/`. No sample thermal images are synthesized. For regression tests only, `examples/synthetic_session.py` generates an explicitly labeled synthetic recording.

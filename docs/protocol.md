@@ -6,4 +6,6 @@ Only P3 `3474:45a2`, native 256x192, is supported. The advertised enhanced displ
 
 The parser checks the expected payload length, start/end sync pairing and matching first marker counter. It preserves all marker counters and original metadata. It can receive arbitrary read fragments and recover after corrupt transfers. The unusual NUC transition is deliberately discarded; subsequent valid frames are delivered.
 
-The documented gain and NUC commands are implemented but still require validation on this physical camera/firmware. An acknowledged command is not proof of measurement accuracy. Register access, arbitrary vendor writes, firmware changes and environmental correction algorithms are not public APIs in v1.
+Physical tests on firmware `00.00.02.18` showed status `0x03` after write-only gain and NUC commands. The SDK accepts `0x02` or `0x03` for those commands, while register/stream reads still require the write `0x02`, data read, then `0x03` sequence. Unknown status bytes remain errors. See the [validation report](validation.md).
+
+An acknowledged command is not proof of measurement accuracy. Register access, arbitrary vendor writes, firmware changes and environmental correction algorithms are not public APIs in v1.

@@ -1,0 +1,20 @@
+{
+  "model": "P3",
+  "firmware": "00.00.02.18",
+  "source": "physical camera",
+  "frames": 30,
+  "gain": "high",
+  "display_rotation_degrees": 180,
+  "fps_recent": 20.611229566464534,
+  "utc_ns": 1790786414059962400,
+  "range_c": [
+    16.100006103515625,
+    27.787506103515625
+  ],
+  "radiometric_accuracy": "not calibrated",
+  "images": {
+    "viewer-live.png": "direct live frame composition",
+    "viewer-roi.png": "same frame replay composition with ROI",
+    "viewer-palettes.png": "same frame replay composition, fixed range"
+  }
+}

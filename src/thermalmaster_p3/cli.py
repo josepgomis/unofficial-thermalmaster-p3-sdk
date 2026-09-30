@@ -28,9 +28,12 @@ def main(argv=None) -> int:
             cmd.add_argument('--duration', type=float, default=60)
         if name == 'viewer':
             cmd.add_argument('--range', type=float, nargs=2, metavar=('MIN_C', 'MAX_C'))
+            cmd.add_argument('--rotate', type=int, choices=(0, 180), default=0, help='Display rotation; raw coordinates stay native')
     cmd = commands.add_parser('replay')
     cmd.add_argument('session')
     cmd.add_argument('--viewer', action='store_true')
+    cmd.add_argument('--range', type=float, nargs=2, metavar=('MIN_C', 'MAX_C'))
+    cmd.add_argument('--rotate', type=int, choices=(0, 180), default=0)
     args = parser.parse_args(argv)
     try:
         if args.command == 'devices':
@@ -40,7 +43,7 @@ def main(argv=None) -> int:
                 from .viewer import run_viewer
                 manifest = json.loads((Path(args.session) / 'manifest.json').read_text(encoding='utf-8'))
                 source = 'SYNTHETIC REPLAY' if manifest.get('configuration', {}).get('synthetic') else 'REPLAY'
-                run_viewer(frames=replay(args.session), source_label=source)
+                run_viewer(frames=replay(args.session), source_label=source, limits=args.range, rotation=args.rotate)
             else:
                 count = 0
                 for frame in replay(args.session):
@@ -82,7 +85,7 @@ def main(argv=None) -> int:
                                               'timeouts': camera.timeouts}, indent=2))
                 elif args.command == 'viewer':
                     from .viewer import run_viewer
-                    run_viewer(camera=camera, limits=args.range)
+                    run_viewer(camera=camera, limits=args.range, rotation=args.rotate)
         return 0
     except KeyboardInterrupt:
         return 130

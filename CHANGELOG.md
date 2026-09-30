@@ -7,5 +7,10 @@
 - CLI, optional OpenCV viewer, versioned NPZ recording and replay.
 - ROS 2 adapter and CI configurations targeting Foxy, Humble and Jazzy.
 - English documentation and Spanish quick start.
+- Real P3 image gallery, identifier-free sample session and reproducible capture tools.
+- Viewer Celsius legend, recent FPS, scale toggle, crosshair/ROI, PNG export and stale-frame states.
+- Optional 180-degree display rotation with native coordinate mapping; raw/ROS arrays unchanged.
+- Firmware 00.00.02.18 write-only command acknowledgment compatibility.
+- WinUSB unplug I/O errors become DeviceDisconnectedError only after USB absence confirmation.
 
-Alpha: public interfaces may change before 1.0. Real-device streaming and ROS runtime verification are pending; see docs/validation.md.
+Alpha: public interfaces may change before 1.0. Windows physical capture works; SDK and simulated-camera ROS runtime tests have passed. Linux hardware and absolute temperature accuracy remain unverified; see [validation](docs/validation.md).

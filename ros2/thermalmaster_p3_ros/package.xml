@@ -3,7 +3,7 @@
   <name>thermalmaster_p3_ros</name>
   <version>0.1.0</version>
   <description>Independent radiometric Thermal Master P3 driver</description>
-  <maintainer email="maintainers@example.invalid">Unofficial P3 SDK contributors</maintainer>
+  <maintainer email="josepgomis@users.noreply.github.com">josepgomis</maintainer>
   <license>Apache-2.0</license>
   <buildtool_depend>ament_python</buildtool_depend>
   <exec_depend>rclpy</exec_depend>

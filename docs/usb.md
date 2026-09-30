@@ -14,7 +14,7 @@ If Windows exposes only one child, inspect the full device tree before choosing 
 
 `Entity not found`, `Access denied`, `Not supported`, or `Resource busy` generally mean a missing/incompatible interface driver or another program owning the camera. Close the vendor app and check both interfaces. `libusb backend not available` means the user-space libusb library is missing; reinstall the package in the Python environment being used.
 
-The development PC currently detects the P3 at USB path `1:3`, but `MI_00` has Windows problem code 28. USB paths can change and are machine-specific.
+On the validated Windows PC, the P3's `MI_00` initially had problem code 28 (no driver). Manually installing WinUSB on that child resolved register access and streaming through both SDK interfaces; the composite parent retained its original driver. This camera exposes a grouped child: do not assume that you must create or replace a second Windows child. USB paths are machine-specific and can change.
 
 ## Linux
 

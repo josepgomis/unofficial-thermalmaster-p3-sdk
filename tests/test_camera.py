@@ -94,3 +94,31 @@ def test_state_and_invalid_gain():
         camera.start()
     with pytest.raises(ValueError):
         camera.read_frame(0)
+
+
+def test_write_only_completed_status_and_unknown_rejected(transport):
+    from thermalmaster_p3 import ProtocolError
+    dev, _, _ = transport
+    with Camera() as camera:
+        original = dev.ctrl_transfer.side_effect
+        def completed(*args, **kwargs):
+            return b'\x03' if args[1] == 0x22 else original(*args, **kwargs)
+        dev.ctrl_transfer.side_effect = completed
+        camera.set_gain('high')
+        camera.trigger_nuc()
+        dev.ctrl_transfer.side_effect = lambda *args, **kwargs: b'\x00'
+        with pytest.raises(ProtocolError):
+            camera.set_gain('low')
+
+
+def test_windows_io_error_requires_absence_for_disconnect(transport):
+    from thermalmaster_p3 import ProtocolError
+    dev, core, _ = transport
+    with Camera() as camera:
+        camera.start()
+        dev.read.side_effect = usb.core.USBError('I/O', error_code=-1)
+        with pytest.raises(ProtocolError):
+            camera.read_frame()
+        core.find.return_value = []
+        with pytest.raises(DeviceDisconnectedError):
+            camera.read_frame()

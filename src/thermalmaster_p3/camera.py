@@ -10,7 +10,8 @@ from .errors import (CameraStateError, DeviceDisconnectedError, DeviceNotFoundEr
 from .frame import Frame
 from .protocol import VID, PID, WIRE_SIZE, FrameParser, command
 
-USB_HELP = ('Check docs/usb.md: Windows requires libusb and WinUSB on the P3 interfaces; '
+USB_HELP = ('USB setup: https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk/blob/main/docs/usb.md '
+            'Windows requires libusb and WinUSB on the P3 interfaces; '
             'Linux requires the P3 udev rule. Close other camera applications.')
 
 
@@ -93,7 +94,9 @@ class Camera:
         dev = self._device
         dev.ctrl_transfer(0x41, 0x20, 0, 0, payload, timeout=1000)
         status = bytes(dev.ctrl_transfer(0xC1, 0x22, 0, 0, 1, timeout=1000))
-        if status != b'\x02':
+        # Firmware 00.00.02.18 returns 0x03 for write-only gain/NUC commands.
+        # Reads still require the documented write-then-read status sequence.
+        if status not in ((b'\x02', b'\x03') if not length else (b'\x02',)):
             raise ProtocolError('Unexpected command acknowledgment: {!r}'.format(status))
         if not length:
             return b''
@@ -210,6 +213,18 @@ class Camera:
                 except core.USBTimeoutError:
                     continue
                 except core.USBError as exc:
+                    # WinUSB can report generic I/O when a claimed device is
+                    # unplugged. Classify it as disconnect only after checking
+                    # that the selected USB bus/address is no longer present.
+                    if getattr(exc, 'errno', None) == 5 or getattr(exc, 'backend_error_code', None) == -1:
+                        try:
+                            _, _, backend = _usb()
+                            present = any(d.bus == self._device.bus and d.address == self._device.address
+                                          for d in core.find(find_all=True, idVendor=VID, idProduct=PID, backend=backend))
+                        except core.USBError:
+                            present = True
+                        if not present:
+                            raise DeviceDisconnectedError('P3 disconnected; reconnect and reopen it.') from exc
                     raise _translate(exc) from exc
 
     def set_gain(self, gain: str) -> None:

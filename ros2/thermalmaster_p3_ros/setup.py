@@ -10,6 +10,6 @@ setup(
     zip_safe=True, license='Apache-2.0',
     tests_require=['pytest'],
     description='Independent Thermal Master P3 ROS 2 driver',
-    maintainer='Unofficial P3 SDK contributors', maintainer_email='maintainers@example.invalid',
+    maintainer='josepgomis', maintainer_email='josepgomis@users.noreply.github.com',
     entry_points={'console_scripts': ['p3_node = thermalmaster_p3_ros.node:main']},
 )

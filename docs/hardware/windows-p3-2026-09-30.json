@@ -1,0 +1,17 @@
+{
+  "model": "P3",
+  "firmware": "00.00.02.18",
+  "os": "Windows",
+  "driver": "WinUSB on MI_00; composite parent unchanged",
+  "result": "stopped_by_user",
+  "requested_seconds": 1800,
+  "observed_seconds_at_last_progress": 660.109,
+  "frames_at_last_progress": 16448,
+  "average_fps_at_last_progress": 24.91709702488527,
+  "evidence": "stdout progress from tools/hardware_validate.py, before user requested stop",
+  "controls": ["gain_low", "gain_high", "NUC acknowledged; subsequent frames received"],
+  "timeout_corruption_drop_counters": null,
+  "counter_limitation": "Final counters were unavailable after process interruption; no zero-loss claim",
+  "accuracy": "not calibrated",
+  "linux_hardware": "not tested"
+}
