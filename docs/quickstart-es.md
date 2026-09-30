@@ -7,7 +7,7 @@ Esta versión 0.1.0 es alpha. La P3 real ya entrega matrices e imágenes en Wind
 Instalación directa desde GitHub (Python ≥3.8 y Git):
 
 ```sh
-python -m pip install "git+https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk.git@main"
+python -m pip install "git+https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk.git@v0.1.0"
 p3 devices
 p3 info
 p3 capture frame.npz
@@ -27,7 +27,7 @@ with Camera() as camera:
 Para el visor:
 
 ```sh
-python -m pip install "unofficial-thermalmaster-p3[viewer] @ git+https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk.git@main"
+python -m pip install "unofficial-thermalmaster-p3[viewer] @ git+https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk.git@v0.1.0"
 p3 viewer --rotate 180
 ```
 

@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0 — unreleased
+## 0.1.0 — 2026-09-30 (alpha)
 
 - Original Python P3 USB transport, validated framing and owned radiometric arrays.
 - Device discovery, gain and NUC commands, typed API and structured errors.

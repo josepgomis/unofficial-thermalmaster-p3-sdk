@@ -1,10 +1,10 @@
 # Validation status — 2026-09-30
 
-Automated validation passed in [GitHub Actions run 36740280965](https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk/actions/runs/36740280965), code commit `0ca5b1c`. All 11 jobs succeeded. ROS tests use a simulated camera; they do not certify USB access or physical accuracy.
+Automated validation passed in [GitHub Actions run 36746454598](https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk/actions/runs/36746454598), code commit `c605573`. All 11 jobs succeeded. ROS tests use a simulated camera; they do not certify USB access or physical accuracy.
 
 | Area | Evidence | Status |
 | --- | --- | --- |
-| SDK unit tests | 39 tests including viewer extra, Windows, Python 3.12.14 / NumPy 2.3.5 | Passed locally; latest CI rerun pending |
+| SDK unit tests | 40 tests including viewer extra, Windows, Python 3.12.14 / NumPy 2.3.5 | Passed locally and in all 8 SDK CI jobs |
 | Parser | Fragmentation, concatenation, corruption, truncation, NUC recovery, bounded queue, counter wrap | Synthetic tests passed |
 | Camera lifecycle | Mock transport, partial claims, timeout, unplug, resource release | Tests passed; not physical streaming |
 | Recording | Full/partial blocks, replay, interruption, owned copies, version/path validation, control events | Passed locally |
@@ -18,7 +18,7 @@ Automated validation passed in [GitHub Actions run 36740280965](https://github.c
 | Physical capture | Firmware 00.00.02.18, WinUSB on grouped MI_00 child; native raw/IR capture and 30-frame replay | Passed on Windows |
 | Capture endurance | Last observed progress: 660.109 s, 16,448 frames, 24.917 average FPS | Stopped at user request; 30-minute acceptance not completed |
 | Gain and NUC | High/low gain and NUC acknowledged; subsequent valid frames delivered | Physical Windows test exercised; not an accuracy certificate |
-| Disconnect/reconnect | Separate short physical test | Pending |
+| Disconnect/reconnect | DeviceDisconnectedError on unplug, fresh Camera receives native frame after replug | Passed physically on Windows |
 | Linux x86_64 / ARM64 | No accessible Linux runtime in this session | Hardware tests pending |
 | ROS Foxy/Humble/Jazzy | Ubuntu 20.04/22.04/24.04 containers; colcon build/test; encodings, Celsius payload, shared headers, gain/timeout validation, NUC service; rosbag2 record/play | All 3 CI jobs passed with simulated camera |
 | Package name | PyPI JSON endpoint returned HTTP 404 on 2026-09-30 | Apparently unregistered; not reserved |
@@ -26,6 +26,8 @@ Automated validation passed in [GitHub Actions run 36740280965](https://github.c
 The owner explicitly stopped the endurance run before 30 minutes. [Observed hardware evidence](hardware/windows-p3-2026-09-30.json) preserves the last stdout progress interval, not an invented final duration. Final timeout/corruption/drop counters were unavailable after interruption; no zero-loss claim is made. The alpha release discloses this incomplete endurance check.
 
 The gallery and release sample use actual acquisitions from a user-approved scene. [Provenance](images/provenance.json) records firmware, timing and display rotation; the configuration manifest omits device serial identifiers. Thermal arrays and original metadata are preserved.
+
+Physical disconnect/reconnect evidence: [short check report](hardware/windows-reconnect-2026-09-30.json).
 
 ## Physical acceptance procedure
 

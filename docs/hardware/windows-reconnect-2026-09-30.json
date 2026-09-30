@@ -1,0 +1,10 @@
+{
+  "test": "physical Windows unplug/replug",
+  "result": "passed",
+  "unplug_error": "DeviceDisconnectedError",
+  "shape": [
+    192,
+    256
+  ],
+  "firmware": "00.00.02.18"
+}

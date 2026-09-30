@@ -18,7 +18,7 @@ Independent Python SDK for native radiometric P3 data, with an optional OpenCV v
 Install from GitHub (Python 3.8 or newer; Git required):
 
 ```sh
-python -m pip install "git+https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk.git@main"
+python -m pip install "git+https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk.git@v0.1.0"
 p3 devices
 p3 info
 p3 capture frame.npz
@@ -48,12 +48,12 @@ with np.load("frame.npz", allow_pickle=False) as saved:
     print(temperatures.shape, temperatures.mean())
 ```
 
-Wheel and source archives will be attached to the [0.1.0 alpha release](https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk/releases). From a checkout, use `python -m pip install .`. PyPI publication is prepared but has not happened; install from GitHub or a release wheel today.
+Wheel, source archive and actual P3 sample are attached to the [0.1.0 alpha release](https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk/releases/tag/v0.1.0). From a checkout, use `python -m pip install .`. PyPI publication is prepared but has not happened; install from GitHub or a release wheel today.
 
 ## Viewer and recording
 
 ```sh
-python -m pip install "unofficial-thermalmaster-p3[viewer] @ git+https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk.git@main"
+python -m pip install "unofficial-thermalmaster-p3[viewer] @ git+https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk.git@v0.1.0"
 p3 viewer
 p3 viewer --range 15 60
 p3 record sessions/experiment --duration 60
