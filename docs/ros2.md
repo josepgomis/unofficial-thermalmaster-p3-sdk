@@ -9,7 +9,7 @@ Use a venv with `--system-site-packages` and the same system Python as ROS. This
 sudo apt install libusb-1.0-0 python3-venv python3-pip python3-numpy python3-usb python3-yaml python3-colcon-common-extensions python3-setuptools python3-wheel
 python3 -m venv --system-site-packages .ros-venv
 . .ros-venv/bin/activate
-python -m pip install --upgrade 'pip>=23' 'setuptools>=61,<77' wheel
+python -m pip install --upgrade 'pip>=23' 'setuptools>=61,<72' 'importlib-metadata>=4' wheel
 python -m pip install --no-build-isolation .
 P3_SDK_SITE=$(python -c "import sysconfig; print(sysconfig.get_paths()['purelib'])")
 export PYTHONPATH="$P3_SDK_SITE:$PYTHONPATH"
@@ -19,7 +19,7 @@ export PYTHONPATH="$P3_SDK_SITE:$PYTHONPATH"
 ros2 launch thermalmaster_p3_ros p3.launch.py
 ```
 
-Install the `ros-$ROS_DISTRO-sensor-msgs`, `diagnostic-msgs`, `std-srvs`, and `rosbag2` packages if they are absent from your ROS installation. Configure [USB permissions](usb.md) first. The launch file accepts `serial`, `path`, `frame_id`, and `camera_info_file` arguments.
+Install the `ros-$ROS_DISTRO-sensor-msgs`, `diagnostic-msgs`, `std-srvs`, and `rosbag2` packages if they are absent from your ROS installation. Configure [USB permissions](usb.md) first. The launch file accepts `serial`, `path`, `frame_id`, and `camera_info_file` arguments. The ROS build environment caps setuptools below 72 to retain colcon's legacy test-discovery interface; this restriction is separate from the standalone SDK's build environment.
 
 ## Topics and controls
 

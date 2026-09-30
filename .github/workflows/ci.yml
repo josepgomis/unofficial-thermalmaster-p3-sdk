@@ -45,7 +45,7 @@ jobs:
           apt-get update
           apt-get install -y libusb-1.0-0 python3-pip python3-venv python3-pytest python3-colcon-common-extensions python3-numpy python3-usb python3-yaml python3-setuptools python3-wheel ros-${ROS_DISTRO}-diagnostic-msgs ros-${ROS_DISTRO}-std-srvs ros-${ROS_DISTRO}-sensor-msgs ros-${ROS_DISTRO}-rosbag2
           python3 -m venv --system-site-packages /opt/p3-env
-          /opt/p3-env/bin/python -m pip install --upgrade 'pip>=23' 'setuptools>=61,<77' wheel
+          /opt/p3-env/bin/python -m pip install --upgrade 'pip>=23' 'setuptools>=61,<72' 'importlib-metadata>=4' wheel
           /opt/p3-env/bin/python -m pip install --no-build-isolation .
           /opt/p3-env/bin/python -c "import thermalmaster_p3; print(thermalmaster_p3.__file__)"
       - name: Build and test ROS package
@@ -58,6 +58,7 @@ jobs:
           source install/setup.bash
           export PYTHONPATH=$P3_SDK_SITE:$PYTHONPATH
           python3 -c "import thermalmaster_p3; print(thermalmaster_p3.__file__)"
+          python3 -m pytest -q ros2/thermalmaster_p3_ros/test
           colcon test --packages-select thermalmaster_p3_ros --event-handlers console_direct+
           colcon test-result --verbose
       - name: rosbag2 simulated capture smoke test
