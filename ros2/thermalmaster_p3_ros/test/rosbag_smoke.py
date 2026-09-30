@@ -64,7 +64,12 @@ def main():
             stop(record)
             # Older ros2 CLI wrappers propagate SIGINT instead of returning 0.
             # Validate the finalized bag and actual playback below as well.
-            assert record.returncode in (0, -signal.SIGINT, 128 + signal.SIGINT), (
+            # Foxy's ros2cli.cli.main explicitly returns signal.SIGINT (2) on
+            # KeyboardInterrupt: github.com/ros2/ros2cli/blob/foxy/ros2cli/ros2cli/cli.py
+            accepted = (0, -signal.SIGINT, 128 + signal.SIGINT)
+            if os.environ.get('ROS_DISTRO') == 'foxy':
+                accepted += (signal.SIGINT,)
+            assert record.returncode in accepted, (
                 'Recorder failed with exit code ' + str(record.returncode))
             executor.remove_node(node)
             node.destroy_node()
