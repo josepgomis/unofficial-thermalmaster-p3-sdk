@@ -1,3 +1,5 @@
+<img width="1672" height="941" alt="image" src="https://github.com/user-attachments/assets/2388c80e-dca3-447e-b75c-6fad365c9f67" />
+
 # Unofficial Thermal Master P3 SDK
 
 Independent Python SDK for native radiometric P3 data, with an optional OpenCV viewer and ROS 2 integration. Not affiliated with or endorsed by Thermal Master.
