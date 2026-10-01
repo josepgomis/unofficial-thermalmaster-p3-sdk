@@ -162,8 +162,11 @@ class Camera:
             self._require_open()
             if self._streaming:
                 return
-            core, _, _ = _usb()
+            core, util, _ = _usb()
             try:
+                if 1 not in self._claimed:
+                    util.claim_interface(self._device, 1)
+                    self._claimed.append(1)
                 self._start_command()
                 time.sleep(1)
                 self._device.set_interface_altsetting(interface=1, alternate_setting=1)
@@ -254,9 +257,13 @@ class Camera:
         with self._lock:
             if self._device is None:
                 return
-            core, _, _ = _usb()
+            core, util, _ = _usb()
             try:
-                self._device.set_interface_altsetting(interface=1, alternate_setting=0)
+                # release_interface resets altsetting without libusb 1.0.25's
+                # invalid mutex unlock in set_interface_alt_setting on unplug.
+                if 1 in self._claimed:
+                    util.release_interface(self._device, 1)
+                    self._claimed.remove(1)
             except core.USBError as exc:
                 raise _translate(exc) from exc
             finally:
@@ -270,10 +277,9 @@ class Camera:
                 return
             _, util, _ = _usb()
             dev = self._device
-            try:
-                dev.set_interface_altsetting(interface=1, alternate_setting=0)
-            except Exception:
-                pass
+            # Releasing interfaces already resets their alternate settings.
+            # Do not call set_interface_altsetting on a disconnected device:
+            # libusb 1.0.25 corrupts its mutex on that error path.
             for interface in reversed(self._claimed):
                 try:
                     util.release_interface(dev, interface)

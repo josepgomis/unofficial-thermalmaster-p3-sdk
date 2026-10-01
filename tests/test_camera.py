@@ -122,3 +122,35 @@ def test_windows_io_error_requires_absence_for_disconnect(transport):
         core.find.return_value = []
         with pytest.raises(DeviceDisconnectedError):
             camera.read_frame()
+
+
+def test_stop_restart_reclaims_stream_and_discards_old_parser(transport):
+    dev, _, util = transport
+    with Camera() as camera:
+        camera.start()
+        first_parser = camera.parser
+        camera.read_frame()
+        camera.stop()
+        camera.stop()
+        camera.start()
+        assert camera.parser is not first_parser
+        assert camera.read_frame().sequence == 0
+        assert sum(call.args == (dev, 1) for call in util.claim_interface.call_args_list) == 2
+
+
+def test_cleanup_avoids_fatal_altsetting_reset_on_unplug(transport):
+    class NativeAbort(BaseException):
+        pass
+    dev, _, util = transport
+    def altsetting(*args, **kwargs):
+        if kwargs['alternate_setting'] == 0:
+            raise NativeAbort('libusb 1.0.25 aborts on disconnected altsetting reset')
+    dev.set_interface_altsetting.side_effect = altsetting
+    with Camera() as camera:
+        camera.start()
+        dev.read.side_effect = usb.core.USBError('unplug', error_code=-4)
+        with pytest.raises(DeviceDisconnectedError):
+            camera.read_frame()
+        camera.stop()
+    assert camera._device is None
+    util.dispose_resources.assert_called()

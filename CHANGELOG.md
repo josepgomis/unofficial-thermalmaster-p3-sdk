@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Fix Linux unplug cleanup abort with libusb 1.0.25: release streaming interfaces on stop, reclaim on restart, and avoid redundant altsetting resets on close.
+- Supply an updated bundled libusb runtime on Linux as well as Windows, retaining Python 3.8 compatibility.
+
 - Hardware acceptance rejects stalled streams even if an earlier frame succeeded, checks radiometric payloads, and records environment and maximum frame gaps.
 - Added a ROS physical acceptance tool with gain/NUC controls and rosbag2 playback; simulation is explicitly identified.
 - Clarified ROS Python selection and why colcon requires a normal SDK installation.

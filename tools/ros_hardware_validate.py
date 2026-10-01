@@ -6,6 +6,7 @@ import argparse
 import importlib.util
 import json
 import math
+from importlib.metadata import version, PackageNotFoundError
 import os
 import platform
 import signal
@@ -63,6 +64,10 @@ def main():
               'requested_seconds': args.duration, 'frames': 0, 'intervals': [], 'controls': [],
               'commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'],
                   cwd=Path(__file__).resolve().parent, text=True).strip()}
+    try:
+        report['libusb_package'] = version('libusb-package')
+    except PackageNotFoundError:
+        report['libusb_package'] = None
     rclpy.init()
     node = module.P3Node()
     observer = rclpy.create_node('p3_acceptance_observer')

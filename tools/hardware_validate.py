@@ -2,6 +2,7 @@
 import argparse
 import json
 import math
+from importlib.metadata import version, PackageNotFoundError
 import platform
 import subprocess
 import time
@@ -30,6 +31,10 @@ def main():
               'requested_seconds': args.duration, 'timestamp_origin': 'host reception',
               'controls': [], 'intervals': [], 'max_stall_seconds': args.max_stall,
               'numpy': np.__version__, 'pyusb': usb.__version__}
+    try:
+        report['libusb_package'] = version('libusb-package')
+    except PackageNotFoundError:
+        report['libusb_package'] = None
     report['commit'] = subprocess.check_output(
         ['git', 'rev-parse', 'HEAD'], cwd=Path(__file__).resolve().parent,
         text=True).strip()

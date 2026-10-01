@@ -1,0 +1,114 @@
+{
+  "started_utc": "2026-10-01T15:10:03.187351+00:00",
+  "platform": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
+  "python": "3.10.12",
+  "requested_seconds": 900.0,
+  "timestamp_origin": "host reception",
+  "controls": [
+    {
+      "elapsed_seconds": 5.031359335999923,
+      "action": "gain_low",
+      "result": "acknowledged"
+    },
+    {
+      "elapsed_seconds": 10.031705834999912,
+      "action": "gain_high",
+      "result": "acknowledged"
+    },
+    {
+      "elapsed_seconds": 20.031663175999938,
+      "action": "nuc",
+      "result": "acknowledged"
+    }
+  ],
+  "intervals": [
+    {
+      "elapsed_seconds": 60.03470213600008,
+      "frames": 1448,
+      "average_fps": 24.119383431265504
+    },
+    {
+      "elapsed_seconds": 120.07346420199997,
+      "frames": 2949,
+      "average_fps": 24.55996434848326
+    },
+    {
+      "elapsed_seconds": 180.0746269660001,
+      "frames": 4449,
+      "average_fps": 24.7064235253977
+    },
+    {
+      "elapsed_seconds": 240.0758502179999,
+      "frames": 5949,
+      "average_fps": 24.77966856973758
+    },
+    {
+      "elapsed_seconds": 300.11473289799983,
+      "frames": 7450,
+      "average_fps": 24.823839629799302
+    },
+    {
+      "elapsed_seconds": 360.15192076300013,
+      "frames": 8951,
+      "average_fps": 24.853400701117607
+    },
+    {
+      "elapsed_seconds": 420.18991186100016,
+      "frames": 10452,
+      "average_fps": 24.87446677077185
+    },
+    {
+      "elapsed_seconds": 480.22788690699986,
+      "frames": 11953,
+      "average_fps": 24.890266321236773
+    },
+    {
+      "elapsed_seconds": 540.2667375859999,
+      "frames": 13454,
+      "average_fps": 24.90251400653439
+    },
+    {
+      "elapsed_seconds": 600.3049258889998,
+      "frames": 14955,
+      "average_fps": 24.91233930465077
+    },
+    {
+      "elapsed_seconds": 660.3439356209999,
+      "frames": 16456,
+      "average_fps": 24.920346977252795
+    },
+    {
+      "elapsed_seconds": 720.3829735950001,
+      "frames": 17957,
+      "average_fps": 24.92701890271971
+    },
+    {
+      "elapsed_seconds": 780.42241283,
+      "frames": 19458,
+      "average_fps": 24.93265144633737
+    },
+    {
+      "elapsed_seconds": 840.4617134580001,
+      "frames": 20959,
+      "average_fps": 24.93748336704855
+    }
+  ],
+  "max_stall_seconds": 5.0,
+  "numpy": "2.2.6",
+  "pyusb": "1.3.1",
+  "commit": "8ce55c7ab8da1f4bafadf529fedcc42af49211df",
+  "model": "P3",
+  "firmware": "00.00.02.18",
+  "max_frame_gap_seconds": 1.4829766650000238,
+  "result": "passed",
+  "elapsed_seconds": 840.4617134580001,
+  "frames": 22446,
+  "average_fps": 24.93748336704855,
+  "timeouts": 3,
+  "corrupt_candidates": 2,
+  "queue_drops": 0,
+  "counter_discontinuities": 741,
+  "seconds": 900.0010020819998,
+  "fps": 24.93997223122528,
+  "discarded_bytes": 206884
+}

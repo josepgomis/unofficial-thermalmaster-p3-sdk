@@ -1,0 +1,11 @@
+{
+  "test": "physical SDK unplug/replug",
+  "platform": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
+  "result": "passed",
+  "unplug_error": "DeviceDisconnectedError",
+  "shape": [
+    192,
+    256
+  ],
+  "firmware": "00.00.02.18"
+}

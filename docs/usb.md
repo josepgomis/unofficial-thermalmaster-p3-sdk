@@ -18,7 +18,7 @@ On the validated Windows PC, the P3's `MI_00` initially had problem code 28 (no 
 
 ## Linux
 
-Install the libusb runtime through your distribution (Ubuntu: `sudo apt install libusb-1.0-0`). Create `/etc/udev/rules.d/99-thermalmaster-p3.rules` containing:
+The Python installation supplies `libusb-package>=1.0.26.4` on Linux and Windows. The SDK selects that bundled userspace runtime; it does not replace system drivers. The system libusb runtime can also be installed through your distribution (Ubuntu: `sudo apt install libusb-1.0-0`). Create `/etc/udev/rules.d/99-thermalmaster-p3.rules` containing:
 
 ```udev
 SUBSYSTEM=="usb", ATTR{idVendor}=="3474", ATTR{idProduct}=="45a2", MODE="0660", GROUP="plugdev", TAG+="uaccess"
@@ -36,3 +36,7 @@ The SDK detaches kernel drivers only from interfaces 0 and 1 of the selected P3 
 - NUC may interrupt frames. The parser drops malformed transition frames and resynchronizes instead of emitting suspect temperature arrays.
 - After unplugging, reopen the standalone SDK or restart the CLI. The ROS node reconnects automatically.
 - WSL is not native Linux USB access. USB passthrough must be configured separately; it has not been validated here.
+
+### Ubuntu 22.04 libusb 1.0.25 disconnect failure
+
+Physical testing found an abort in `libusb_close` after unplugging with Ubuntu's libusb 1.0.25. Its [`libusb_set_interface_alt_setting` error path](https://github.com/libusb/libusb/blob/v1.0.25/libusb/core.c) unlocks a mutex before taking the lock when the device is disconnected. The SDK now stops by releasing the streaming interface, reclaims it on restart, and closes by releasing interfaces without a redundant altsetting reset. libusb documents that interface release resets the alternate setting. The bundled runtime also avoids the affected startup path if unplugging occurs during initialization.

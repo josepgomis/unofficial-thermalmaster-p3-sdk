@@ -1,0 +1,22 @@
+{
+  "test": "Linux physical CLI, recording, replay and viewer",
+  "result": "passed",
+  "camera": {
+    "model": "P3",
+    "firmware": "00.00.02.18"
+  },
+  "record": {
+    "frames": 89,
+    "seconds": 5.000075687999924,
+    "fps": 17.799730554799023,
+    "corrupt_candidates": 0,
+    "counter_discontinuities": 5,
+    "queue_drops": 0,
+    "timeouts": 1
+  },
+  "replayed_frames": 89,
+  "viewer_native_window": "passed",
+  "palettes_and_roi_render": "passed",
+  "raw_unchanged_by_display": true,
+  "verified_display_rotation_degrees": 180
+}
