@@ -13,7 +13,7 @@ Independent Python SDK for native radiometric P3 data, with an optional OpenCV v
 
 *Actual P3 acquisition on Windows, firmware 00.00.02.18, display rotated 180 degrees for this mounting. The image above is exported by the same compositor used in the viewer; no synthetic thermal data. [Image provenance](docs/images/provenance.json).*
 
-**1.0.0 is the first stable release.** Ubuntu 22.04 x86_64 and ROS 2 Humble passed separate 15-minute physical P3 acceptance runs, including gain/NUC, recording/replay and reconnect checks. Windows capture was previously exercised. ARM64, physical Foxy/Jazzy tests and absolute measurement accuracy remain unverified. Check the [validation report](docs/validation.md) for measured results and the distinction between hardware tests and automated tests.
+**1.0.0 is the first stable release.** Ubuntu 22.04 x86_64 and ROS 2 Humble passed physical P3 stability and functional validation, including gain/NUC, recording/replay and reconnect checks. Windows capture was previously exercised. ARM64, physical Foxy/Jazzy tests and absolute measurement accuracy remain unverified. Check the [validation report](docs/validation.md) for measured results and the distinction between hardware tests and automated tests.
 
 ## Install and capture
 
@@ -76,6 +76,8 @@ Download `p3-real-sample.zip` from the release, extract it, then run `p3 replay 
 
 
 ## ROS 2 and documentation
+
+ROS 2 publishes `/thermal/raw`, `/thermal/temperature`, `/thermal/ir`, `/thermal/camera_info` and `/diagnostics`. View the infrared stream with `ros2 run rqt_image_view rqt_image_view /thermal/ir`; see the ROS guide for setup and QoS.
 
 - [ROS 2 setup, topics, calibration and rosbag2](docs/ros2.md)
 - [Viewer controls, scale and exports](docs/viewer.md)

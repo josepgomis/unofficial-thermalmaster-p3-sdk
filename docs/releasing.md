@@ -1,7 +1,7 @@
 # Release checklist
 
 1. Use `josepgomis/unofficial-thermalmaster-p3-sdk`. Keep maintainer metadata and support links consistent.
-2. Require separate 900-second physical SDK and ROS Humble acceptance runs on Linux x86_64, plus capture, record/replay, viewer, high/low gain, NUC, stop/start, SDK reopen and automatic ROS reconnect. Examine throughput, gaps and counters. Fix failures and repeat affected checks; keep the published alpha until acceptance completes.
+2. Require independent physical SDK and ROS Humble stability validation on Linux x86_64, plus capture, record/replay, viewer, high/low gain, NUC, stop/start, SDK reopen and automatic ROS reconnect. Examine throughput, gaps and counters. Fix failures and repeat affected checks; retain the current published release until acceptance completes.
 3. Preserve real evidence in `docs/hardware` and update `docs/validation.md`. Omit private serials and captures. Disclose unverified absolute accuracy, ARM64 and physical Foxy/Jazzy; distinguish historical Windows results from new Linux evidence. Display rotation is mounting-specific and preserves native arrays.
 4. Run the full SDK Windows/Linux Python 3.8/3.10/3.12/3.13 and ROS Foxy/Humble/Jazzy CI matrix. Review dependency licenses. Build wheel/sdist, run `twine check`, install the wheel in a clean environment and verify the quick start. Keep the base import independent of optional OpenCV and ROS.
 5. Synchronize version in pyproject, SDK `__version__`, ROS setup/package.xml and changelog. Keep the ROS SDK dependency at `>=1.0.0,<2.0.0` for 1.x. The documented API, CLI, recording and ROS contracts are stable within 1.x; breaking changes require a new major version. Preserve Python 3.8/Foxy-compatible syntax and dependencies.

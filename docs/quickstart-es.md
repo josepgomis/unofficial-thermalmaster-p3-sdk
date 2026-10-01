@@ -2,7 +2,7 @@
 
 SDK no oficial e independiente para Thermal Master P3. Python ≥3.8, Windows y Linux; visor y ROS 2 opcionales.
 
-La versión 1.0.0 estabiliza la API pública y los contratos de ROS. La P3 real ha pasado pruebas independientes de 15 minutos del SDK y ROS 2 Humble en Ubuntu 22.04 x86_64, incluida reconexión. Windows tiene evidencia física previa. Consulta la [validación](validation.md): ARM64, pruebas físicas en Foxy/Jazzy y exactitud absoluta siguen sin certificarse.
+La versión 1.0.0 estabiliza la API pública y los contratos de ROS. La P3 real ha superado las pruebas de estabilidad y funcionamiento del SDK y de ROS 2 Humble en Ubuntu 22.04 x86_64, incluida reconexión. Windows tiene evidencia física previa. Consulta la [validación](validation.md): ARM64, pruebas físicas en Foxy/Jazzy y exactitud absoluta siguen sin certificarse.
 
 Instalación directa desde GitHub (Python ≥3.8 y Git):
 

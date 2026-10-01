@@ -1,6 +1,6 @@
 # ROS 2 integration
 
-Targets: Foxy/Ubuntu 20.04, Humble/22.04 and Jazzy/24.04. All three passed container CI builds, topic/parameter/NUC tests and simulated-camera rosbag2 recording/playback; see the [validation report](validation.md). Foxy is a legacy target; its CI image and dependencies may require maintenance. Linux x86_64 and Humble have passed physical 15-minute acceptance and reconnect tests. ARM64 and physical Foxy/Jazzy remain unverified.
+Targets: Foxy/Ubuntu 20.04, Humble/22.04 and Jazzy/24.04. All three passed container CI builds, topic/parameter/NUC tests and simulated-camera rosbag2 recording/playback; see the [validation report](validation.md). Foxy is a legacy target; its CI image and dependencies may require maintenance. Linux x86_64 and Humble have passed physical stability, functional and reconnect tests. ARM64 and physical Foxy/Jazzy remain unverified.
 
 Use a venv with `--system-site-packages` and the same system Python as ROS. On the Ubuntu targets below, use `/usr/bin/python3` explicitly: a Conda or other Python selected by your shell may be incompatible with rclpy. This retains ROS modules, avoids modifying externally managed Python, and supplies a packaging backend that understands the SDK's pyproject metadata:
 
@@ -32,6 +32,21 @@ Install the `ros-$ROS_DISTRO-sensor-msgs`, `diagnostic-msgs`, `std-srvs`, and `r
 | `thermal/ir` | sensor_msgs/Image, mono8 | Infrared brightness |
 | `thermal/camera_info` | sensor_msgs/CameraInfo | Native-grid calibration, or uncalibrated K[0]=0 |
 | `diagnostics` | diagnostic_msgs/DiagnosticArray | Connection, FPS, framing errors and timeouts |
+
+### Inspect the live stream
+
+With the camera node running, open a second terminal, source the same ROS installation and workspace, and use the same `ROS_DOMAIN_ID`:
+
+```sh
+ros2 topic list -t
+ros2 topic info /thermal/ir --verbose
+ros2 topic hz /thermal/ir
+ros2 topic echo /thermal/camera_info --once --qos-reliability best_effort
+ros2 topic echo /diagnostics --once
+ros2 run rqt_image_view rqt_image_view /thermal/ir
+```
+
+Install `ros-$ROS_DISTRO-rqt-image-view` if needed. `/thermal/ir` is the direct grayscale preview. `/thermal/raw` contains radiometric integer values and `/thermal/temperature` contains float Celsius values; display normalization does not replace these measurements. RViz2 can also show `/thermal/ir` with an Image display configured for **Best Effort** reliability. Default topic names assume no namespace or remapping. Each terminal must use the same ROS domain.
 
 Image topics use the sensor-data QoS profile. Messages from one frame share a header stamped with the ROS clock after SDK reception. The default optical frame is `p3_optical_frame`; the user supplies the mounting transform. No TF extrinsics or hardware synchronization are fabricated. A paused simulated clock cannot describe live exposure timing.
 
@@ -67,10 +82,10 @@ If your recorder uses incompatible QoS, supply a QoS override with `best_effort`
 
 ## Physical acceptance
 
-After building and sourcing the workspace, run the 15-minute acceptance check:
+After building and sourcing the workspace, run the physical stability and functional validation:
 
 ```sh
 python tools/ros_hardware_validate.py --duration 900 --bag build/p3-physical-bag --report build/ros-hardware-validation.json
 ```
 
-This checks same-frame headers, image encodings and dimensions, raw-to-Celsius payloads, uncalibrated CameraInfo, high/low gain, the NUC service, continuous publication, and rosbag2 playback. It records the first 15 seconds to limit disk use; the live stream is checked for all 900 seconds. Choose a new bag path for each run. `--simulate --duration 25` tests the checker itself and is explicitly reported as non-physical evidence. Disconnect/reconnect must be checked separately. Review per-minute progress and SDK counters before accepting a run; timestamps remain host reception times.
+This checks same-frame headers, image encodings and dimensions, raw-to-Celsius payloads, uncalibrated CameraInfo, high/low gain, the NUC service, continuous publication, and rosbag2 playback. It records a short sample to limit disk use and checks the live stream throughout the configured validation period. Choose a new bag path for each run. `--simulate --duration 25` tests the checker itself and is explicitly reported as non-physical evidence. Disconnect/reconnect must be checked separately. Review per-minute progress and SDK counters before accepting a run; timestamps remain host reception times.
