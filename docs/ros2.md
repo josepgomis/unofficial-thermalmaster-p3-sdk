@@ -2,15 +2,17 @@
 
 Targets: Foxy/Ubuntu 20.04, Humble/22.04 and Jazzy/24.04. All three passed container CI builds, topic/parameter/NUC tests and simulated-camera rosbag2 recording/playback; see the [validation report](validation.md). Foxy is a legacy target; its CI image and dependencies may require maintenance. Linux hardware support, including ARM64, remains unverified.
 
-Use a venv with `--system-site-packages` and the same system Python as ROS. This retains ROS modules, avoids modifying externally managed Python, and supplies a packaging backend that understands the SDK's pyproject metadata:
+Use a venv with `--system-site-packages` and the same system Python as ROS. On the Ubuntu targets below, use `/usr/bin/python3` explicitly: a Conda or other Python selected by your shell may be incompatible with rclpy. This retains ROS modules, avoids modifying externally managed Python, and supplies a packaging backend that understands the SDK's pyproject metadata:
 
 ```sh
 # Run from this repository after sourcing your ROS installation.
 sudo apt install libusb-1.0-0 python3-venv python3-pip python3-numpy python3-usb python3-yaml python3-colcon-common-extensions python3-setuptools python3-wheel
-python3 -m venv --system-site-packages .ros-venv
+/usr/bin/python3 -m venv --system-site-packages .ros-venv
 . .ros-venv/bin/activate
 python -m pip install --upgrade 'pip>=23' 'setuptools>=61,<72' 'packaging>=24' 'importlib-metadata>=4' wheel
 python -m pip install --no-build-isolation .
+# Install normally, not editable: colcon may invoke the system Python,
+# which does not process editable .pth files from a PYTHONPATH directory.
 P3_SDK_SITE=$(python -c "import sysconfig; print(sysconfig.get_paths()['purelib'])")
 export PYTHONPATH="$P3_SDK_SITE:$PYTHONPATH"
 colcon build --base-paths ros2
@@ -62,3 +64,13 @@ ros2 bag play p3-run
 ```
 
 If your recorder uses incompatible QoS, supply a QoS override with `best_effort` reliability and `volatile` durability for the four sensor topics. Do not run the live publisher on the same topics while inspecting playback.
+
+## Physical acceptance
+
+After building and sourcing the workspace, run the 15-minute acceptance check:
+
+```sh
+python tools/ros_hardware_validate.py --duration 900 --bag build/p3-physical-bag --report build/ros-hardware-validation.json
+```
+
+This checks same-frame headers, image encodings and dimensions, raw-to-Celsius payloads, uncalibrated CameraInfo, high/low gain, the NUC service, continuous publication, and rosbag2 playback. It records the first 15 seconds to limit disk use; the live stream is checked for all 900 seconds. Choose a new bag path for each run. `--simulate --duration 25` tests the checker itself and is explicitly reported as non-physical evidence. Disconnect/reconnect must be checked separately. Review per-minute progress and SDK counters before accepting a run; timestamps remain host reception times.

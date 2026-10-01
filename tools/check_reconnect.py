@@ -1,5 +1,6 @@
 """Short manual unplug/replug check; waits for USB presence without streaming loops."""
 import json
+import platform
 import time
 from pathlib import Path
 
@@ -16,7 +17,8 @@ def wait_for_presence(present, timeout=120):
 
 
 def main():
-    report = {'test': 'physical Windows unplug/replug', 'result': 'pending'}
+    report = {'test': 'physical SDK unplug/replug', 'platform': platform.platform(),
+              'result': 'pending'}
     camera = Camera()
     try:
         camera.open()
@@ -39,8 +41,12 @@ def main():
             frame = reopened.read_frame()
             report.update(result='passed', shape=list(frame.raw.shape), firmware=reopened.info['firmware'])
         print(json.dumps(report), flush=True)
+    except BaseException as exc:
+        report.update(result='failed', error=str(exc))
+        raise
     finally:
         camera.close()
+        Path('build').mkdir(exist_ok=True)
         Path('build/reconnect-validation.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
 
 

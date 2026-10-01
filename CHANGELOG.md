@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Hardware acceptance rejects stalled streams even if an earlier frame succeeded, checks radiometric payloads, and records environment and maximum frame gaps.
+- Added a ROS physical acceptance tool with gain/NUC controls and rosbag2 playback; simulation is explicitly identified.
+- Clarified ROS Python selection and why colcon requires a normal SDK installation.
+
 ## 0.1.0 — 2026-09-30 (alpha)
 
 - Original Python P3 USB transport, validated framing and owned radiometric arrays.

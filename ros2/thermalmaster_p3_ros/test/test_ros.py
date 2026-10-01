@@ -82,3 +82,48 @@ def test_fake_camera_topics_and_nuc(monkeypatch):
         observer.destroy_node()
         node.destroy_node()
         rclpy.shutdown()
+
+
+def test_reconnect_reopens_camera_and_resets_stream(monkeypatch):
+    from thermalmaster_p3 import DeviceDisconnectedError, FrameTimeoutError
+    instances = []
+    class FakeCamera:
+        def __init__(self, **kwargs):
+            self.parser, self.timeouts = FrameParser(), 0
+            self.closed = False
+            self.failure = None
+            instances.append(self)
+        def open(self): pass
+        def start(self): pass
+        def set_gain(self, gain): pass
+        def close(self): self.closed = True
+        def read_frame(self, timeout):
+            if self.failure:
+                raise self.failure
+            return Frame(np.full((192, 256), 19082, np.uint16),
+                         np.zeros((192, 256), np.uint8), np.zeros((2, 256), np.uint16),
+                         0, time.monotonic_ns(), time.time_ns(), (0, 0, 0), (0, 0, 0))
+    monkeypatch.setattr(module, 'Camera', FakeCamera)
+    rclpy.init()
+    node = module.P3Node()
+    try:
+        node.capture()
+        first = node.camera
+        assert node.frames == 1
+        first.failure = DeviceDisconnectedError('unplugged')
+        node.capture()
+        assert first.closed and node.camera is None
+        assert node.retry_at > time.monotonic()
+        node.retry_at = 0
+        node.capture()
+        assert node.camera is not first and node.frames == 1
+        assert len(instances) == 2
+        # A persistently stalled stream must also close and reopen.
+        second = node.camera
+        second.failure = FrameTimeoutError('stalled')
+        node.last_frame_at = time.monotonic() - 6
+        node.capture()
+        assert second.closed and node.camera is None
+    finally:
+        node.destroy_node()
+        rclpy.shutdown()
