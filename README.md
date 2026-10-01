@@ -87,6 +87,9 @@ p3 replay sessions/experiment --viewer --rotate 180
 
 Use `--rotate 180` only for an inverted mounting. Mouse dragging selects a ROI; `g` changes gain, `n` requests NUC, `r` toggles recording and `i` exports the display. [Viewer controls](docs/viewer.md) · [Recording format](docs/recording.md).
 
+<img width="1600" height="637" alt="image" src="https://github.com/user-attachments/assets/51b6dbc7-44f3-4c81-a5b1-4d194fce276d" />
+
+
 ## ROS 2 thermal-camera integration
 
 Follow the [ROS 2 setup and visualization tutorial](docs/tutorial-ros2.md) to install the SDK with the ROS-compatible system Python, build the adapter and launch it:
