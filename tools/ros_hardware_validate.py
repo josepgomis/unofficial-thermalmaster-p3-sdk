@@ -115,7 +115,8 @@ def main():
     nuc = observer.create_client(Trigger, 'thermal/trigger_nuc')
     def diagnostics(message):
         report['diagnostic_messages'] = report.get('diagnostic_messages', 0) + 1
-        report['last_diagnostics'] = [{'level': s.level, 'message': s.message}
+        report['last_diagnostics'] = [{'level': ord(s.level) if isinstance(s.level, bytes)
+                                      else int(s.level), 'message': s.message}
                                     for s in message.status]
     subscriptions.append(observer.create_subscription(
         DiagnosticArray, 'diagnostics', diagnostics, 10))
