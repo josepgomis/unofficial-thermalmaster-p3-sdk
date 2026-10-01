@@ -3,7 +3,7 @@
 The viewer displays original 256 x 192 P3 measurements at 3x nearest-neighbor scale. It is a small inspection tool for acquisition and robotics development. The SDK core does not require OpenCV.
 
 ```sh
-python -m pip install "unofficial-thermalmaster-p3[viewer] @ git+https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk.git@v0.1.0"
+python -m pip install "unofficial-thermalmaster-p3[viewer] @ git+https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk.git@v1.0.0"
 p3 viewer
 p3 viewer --range 15 60
 p3 viewer --rotate 180

@@ -1,0 +1,48 @@
+{
+  "model": "P3",
+  "firmware": "00.00.02.18",
+  "sdk_version": "1.0.0",
+  "sources": {
+    "linux-p3-live.png": {
+      "source": "physical Linux P3 acquisition, SDK viewer compositor",
+      "display_rotation_degrees": 180,
+      "native_arrays_rotated": false
+    },
+    "linux-temperature-matrix.png": {
+      "source": "same physical Linux acquisition saved as NPZ",
+      "utc_ns": 1790871410221520035,
+      "source_npz_sha256": "3fd54b2cd473602ed44bb751974df53b8c74c154cc1edb6f1098e6465cea6af8",
+      "processing": "Celsius display rotated 180 degrees with original sensor coordinates on axes; histogram of native ROI temperature[80:112,112:144]; no interpolation or mutation of stored arrays",
+      "display_rotation_degrees": 180,
+      "native_arrays_rotated": false,
+      "roi_min_mean_max_c": [
+        24.475006103515625,
+        25.532440185546875,
+        26.975006103515625
+      ]
+    },
+    "ros2-humble-topics.jpg": {
+      "source": "actual physical ROS 2 Humble session, reformatted command output",
+      "output_reference": "ros2-humble-output.json",
+      "identity": "josepgomis",
+      "literal_desktop_screenshot": false
+    },
+    "social-preview.jpg": {
+      "source": "HTML presentation with unchanged physical Linux P3 viewer export",
+      "size_pixels": [
+        1280,
+        640
+      ],
+      "native_arrays_rotated": false,
+      "display_rotation_degrees": 180
+    }
+  },
+  "radiometric_accuracy": "unverified; no calibrated reference",
+  "images_sha256": {
+    "linux-p3-live.png": "4ab489e24ccc655fa246f49bae6eb57c6702fc18b1d7b060dd96ed73f9966b21",
+    "linux-temperature-matrix.png": "a10df9778061c024f9e38175100b84bfb1f66e37c867c3a0cd35fd63ca8202a7",
+    "ros2-humble-topics.jpg": "814b5d31a328ce52a364e3a586e84374e53fcb08993d7f8bc05b36f6c51c9931",
+    "ros2-humble-output.json": "9fd8e6fcc7d8828ea6e594e8fe067e3efb211df7e2810a1f4b65dcb2d4aa10e0",
+    "social-preview.jpg": "64c057665b3102706543e7803f243e68cf725879ff4794e0225e92dbef48d5ae"
+  }
+}

@@ -21,6 +21,10 @@ p3 capture frame.npz
 
 ## Analyze with NumPy
 
+For recorded physical data without a camera, follow the [NumPy tutorial](tutorial-numpy.md) and run `python examples/offline_numpy_analysis.py p3-real-sample`.
+
+### Live acquisition
+
 ```sh
 python examples/numpy_analysis.py
 ```
@@ -52,7 +56,7 @@ You can also replay the release's actual P3 sample without hardware. The synthet
 
 ## ROS 2
 
-Follow [ROS installation and launch](ros2.md) for Foxy, Humble or Jazzy. The adapter publishes raw `16UC1`, Celsius `32FC1`, IR `mono8` and `CameraInfo` with sensor QoS, plus diagnostics and a NUC service. The guide includes parameter changes and rosbag2 commands.
+Follow the [ROS visualization tutorial](tutorial-ros2.md) and [full parameter/calibration reference](ros2.md) for Foxy, Humble or Jazzy. The adapter publishes raw `16UC1`, Celsius `32FC1`, IR `mono8` and `CameraInfo` with sensor QoS, plus diagnostics and a NUC service. The guide includes parameter changes and rosbag2 commands.
 
 For physical endurance checks from a checkout:
 

@@ -1,0 +1,10 @@
+{
+  "physical": true,
+  "source": "ROS 2 Humble physical P3 live stream",
+  "topics": "/diagnostics [diagnostic_msgs/msg/DiagnosticArray]\n/thermal/camera_info [sensor_msgs/msg/CameraInfo]\n/thermal/ir [sensor_msgs/msg/Image]\n/thermal/raw [sensor_msgs/msg/Image]\n/thermal/temperature [sensor_msgs/msg/Image]\n",
+  "rate_output": "average rate: 24.964\n\tmin: 0.037s max: 0.045s std dev: 0.00125s window: 26\naverage rate: 25.016\n\tmin: 0.037s max: 0.045s std dev: 0.00098s window: 52\naverage rate: 25.011\n\tmin: 0.037s max: 0.045s std dev: 0.00081s window: 77\naverage rate: 25.000\n\tmin: 0.037s max: 0.045s std dev: 0.00071s window: 100\naverage rate: 24.998\n\tmin: 0.039s max: 0.041s std dev: 0.00026s window: 100\n",
+  "sdk_version": "1.0.0",
+  "frame_id": "p3_optical_frame",
+  "frames_received": 314,
+  "captured_utc": "2026-10-01T16:43:24Z"
+}

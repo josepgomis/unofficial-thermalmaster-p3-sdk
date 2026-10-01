@@ -23,7 +23,7 @@ for frame in replay('sessions/run-01'):
 
 ## Actual P3 sample
 
-Download `p3-real-sample.zip` from the [0.1.0 alpha release](https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk/releases). Extract it using your archive tool; the resulting directory is `p3-real-sample/`.
+Download `p3-real-sample.zip` from the [v1.0.0 release](https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk/releases/tag/v1.0.0). Extract it using your archive tool; the resulting directory is `p3-real-sample/`.
 
 ```sh
 p3 replay p3-real-sample
