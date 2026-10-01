@@ -1,0 +1,10 @@
+{
+  "test": "physical ROS unplug/replug",
+  "platform": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
+  "result": "passed",
+  "disconnect_error": "P3 disconnected; reconnect and reopen it.",
+  "received_after_reconnect": 1,
+  "firmware": "00.00.02.18",
+  "fresh_camera_instance": true,
+  "old_samples_after_reconnect": false
+}

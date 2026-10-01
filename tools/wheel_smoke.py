@@ -8,7 +8,7 @@ from thermalmaster_p3 import Camera, Frame, raw_to_celsius, __version__
 from thermalmaster_p3.recording import SessionWriter, replay
 
 assert 'cv2' not in sys.modules and 'rclpy' not in sys.modules
-assert __version__ == '0.1.0'
+assert __version__ == '1.0.0'
 np.testing.assert_allclose(raw_to_celsius(np.array([19082], np.uint16)), [25.00625], atol=.0001)
 frame = Frame(np.full((192, 256), 19082, np.uint16), np.zeros((192, 256), np.uint8),
               np.zeros((2, 256), np.uint16), 0, 123, 456, (1, 0, 0), (1, 0, 40))

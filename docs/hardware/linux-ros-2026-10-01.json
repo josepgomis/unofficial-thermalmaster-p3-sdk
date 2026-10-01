@@ -1,0 +1,127 @@
+{
+  "result": "passed",
+  "physical": true,
+  "platform": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
+  "python": "3.10.12",
+  "ros_distro": "humble",
+  "ros_domain_id": "83",
+  "numpy": "2.2.6",
+  "started_utc": "2026-10-01T15:58:34.047294+00:00",
+  "requested_seconds": 900.0,
+  "frames": 22350,
+  "intervals": [
+    {
+      "seconds": 60.02603090500088,
+      "frames": 1350,
+      "published_frames": 1351
+    },
+    {
+      "seconds": 120.02677062100065,
+      "frames": 2850,
+      "published_frames": 2851
+    },
+    {
+      "seconds": 180.02814041200054,
+      "frames": 4350,
+      "published_frames": 4351
+    },
+    {
+      "seconds": 240.02873240900044,
+      "frames": 5850,
+      "published_frames": 5851
+    },
+    {
+      "seconds": 300.0297900130008,
+      "frames": 7350,
+      "published_frames": 7351
+    },
+    {
+      "seconds": 360.030001868,
+      "frames": 8850,
+      "published_frames": 8851
+    },
+    {
+      "seconds": 420.0300655630008,
+      "frames": 10350,
+      "published_frames": 10351
+    },
+    {
+      "seconds": 480.0311594270006,
+      "frames": 11850,
+      "published_frames": 11851
+    },
+    {
+      "seconds": 540.0331149340009,
+      "frames": 13350,
+      "published_frames": 13351
+    },
+    {
+      "seconds": 600.0333295830005,
+      "frames": 14850,
+      "published_frames": 14851
+    },
+    {
+      "seconds": 660.0336365370003,
+      "frames": 16350,
+      "published_frames": 16351
+    },
+    {
+      "seconds": 720.0349326360001,
+      "frames": 17850,
+      "published_frames": 17851
+    },
+    {
+      "seconds": 780.0349505140002,
+      "frames": 19350,
+      "published_frames": 19351
+    },
+    {
+      "seconds": 840.036212039,
+      "frames": 20850,
+      "published_frames": 20851
+    },
+    {
+      "seconds": 900.0368158230003,
+      "frames": 22350,
+      "published_frames": 22351
+    }
+  ],
+  "controls": [
+    {
+      "action": "gain_low",
+      "result": "acknowledged"
+    },
+    {
+      "action": "gain_high",
+      "result": "acknowledged"
+    },
+    {
+      "action": "nuc",
+      "result": "acknowledged"
+    }
+  ],
+  "commit": "d72918beaca683edcb23613c94f7378436aca112",
+  "libusb_package": "1.0.30.0",
+  "diagnostic_messages": 909,
+  "last_diagnostics": [
+    {
+      "level": 0,
+      "message": "Streaming (host reception timestamps)"
+    }
+  ],
+  "max_frame_gap_seconds": 0.7494849479999175,
+  "camera": {
+    "model": "P3",
+    "firmware": "00.00.02.18"
+  },
+  "counters": {
+    "corrupt_candidates": 4,
+    "counter_discontinuities": 731,
+    "queue_drops": 0,
+    "timeouts": 14
+  },
+  "published_frames": 22351,
+  "seconds": 900.0370395150003,
+  "fps": 24.832311352330642,
+  "rosbag_replayed_frames": 248
+}

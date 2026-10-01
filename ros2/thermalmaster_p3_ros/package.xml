@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="3">
   <name>thermalmaster_p3_ros</name>
-  <version>0.1.0</version>
+  <version>1.0.0</version>
   <description>Independent radiometric Thermal Master P3 driver</description>
   <maintainer email="josepgomis@users.noreply.github.com">josepgomis</maintainer>
   <license>Apache-2.0</license>

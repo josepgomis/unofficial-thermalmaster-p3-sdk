@@ -4,14 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "unofficial-thermalmaster-p3"
-version = "0.1.0"
+version = "1.0.0"
 description = "Independent radiometric Thermal Master P3 SDK for Python and robotics"
 readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "Apache-2.0"}
 maintainers = [{name = "josepgomis", email = "josepgomis@users.noreply.github.com"}]
 dependencies = ["numpy>=1.21", "pyusb>=1.2", "libusb-package>=1.0.26.4; sys_platform == 'win32' or sys_platform == 'linux'"]
-classifiers = ["Development Status :: 3 - Alpha", "Programming Language :: Python :: 3", "Operating System :: Microsoft :: Windows", "Operating System :: POSIX :: Linux"]
+classifiers = ["Development Status :: 5 - Production/Stable", "Programming Language :: Python :: 3", "Operating System :: Microsoft :: Windows", "Operating System :: POSIX :: Linux"]
 
 [project.urls]
 Homepage = "https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk"

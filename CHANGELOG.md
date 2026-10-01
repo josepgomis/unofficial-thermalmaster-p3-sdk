@@ -1,6 +1,9 @@
 # Changelog
 
-## Unreleased
+## 1.0.0 — 2026-10-01
+
+- Linux x86_64 SDK and ROS 2 Humble passed separate 15-minute physical acceptance runs, gain/NUC, record/replay and unplug/replug checks.
+- Stabilize the documented SDK API, CLI, recording format and ROS topic/encoding contracts for the 1.x series. Absolute accuracy, ARM64 and physical Foxy/Jazzy validation remain outside this acceptance.
 
 - Fix Linux unplug cleanup abort with libusb 1.0.25: release streaming interfaces on stop, reclaim on restart, and avoid redundant altsetting resets on close.
 - Supply an updated bundled libusb runtime on Linux as well as Windows, retaining Python 3.8 compatibility.

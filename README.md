@@ -7,20 +7,20 @@ Independent Python SDK for native radiometric P3 data, with an optional OpenCV v
 [![CI](https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/python-3.8%2B-blue)](pyproject.toml)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
-[![Status](https://img.shields.io/badge/status-alpha-orange)](CHANGELOG.md)
+[![Status](https://img.shields.io/badge/status-v1.0.0-green)](CHANGELOG.md)
 
 ![Live P3 acquisition in the OpenCV viewer, with Celsius legend and cursor measurement](docs/images/viewer-live.png)
 
 *Actual P3 acquisition on Windows, firmware 00.00.02.18, display rotated 180 degrees for this mounting. The image above is exported by the same compositor used in the viewer; no synthetic thermal data. [Image provenance](docs/images/provenance.json).*
 
-**0.1.0 is an alpha.** Windows USB access and real radiometric capture have been exercised. Linux hardware and absolute measurement accuracy remain unverified. Check the [validation report](docs/validation.md) for measured results and the distinction between hardware tests and automated tests.
+**1.0.0 is the first stable release.** Ubuntu 22.04 x86_64 and ROS 2 Humble passed separate 15-minute physical P3 acceptance runs, including gain/NUC, recording/replay and reconnect checks. Windows capture was previously exercised. ARM64, physical Foxy/Jazzy tests and absolute measurement accuracy remain unverified. Check the [validation report](docs/validation.md) for measured results and the distinction between hardware tests and automated tests.
 
 ## Install and capture
 
 Install from GitHub (Python 3.8 or newer; Git required):
 
 ```sh
-python -m pip install "git+https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk.git@v0.1.0"
+python -m pip install "git+https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk.git@v1.0.0"
 p3 devices
 p3 info
 p3 capture frame.npz
@@ -50,14 +50,15 @@ with np.load("frame.npz", allow_pickle=False) as saved:
     print(temperatures.shape, temperatures.mean())
 ```
 
-Wheel, source archive and actual P3 sample are attached to the [0.1.0 alpha release](https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk/releases/tag/v0.1.0). From a checkout, use `python -m pip install .`. PyPI publication is prepared but has not happened; install from GitHub or a release wheel today.
+Wheel, source archive and actual P3 sample are attached to the [1.0.0 release](https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk/releases/tag/v1.0.0). From a checkout, use `python -m pip install .`. PyPI publication is prepared but has not happened; install from GitHub or a release wheel today.
 
 ## Viewer and recording
 
 ```sh
-python -m pip install "unofficial-thermalmaster-p3[viewer] @ git+https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk.git@v0.1.0"
+python -m pip install "unofficial-thermalmaster-p3[viewer] @ git+https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk.git@v1.0.0"
 p3 viewer
 p3 viewer --range 15 60
+p3 viewer --rotate 180  # Use for an inverted mounting; native data stays unchanged
 p3 record sessions/experiment --duration 60
 p3 replay sessions/experiment
 p3 replay sessions/experiment --viewer
@@ -97,12 +98,12 @@ python -m build
 python -m twine check dist/*
 ```
 
-CI passed on Windows/Linux with Python 3.8, 3.10, 3.12 and 3.13. Foxy, Humble and Jazzy jobs passed colcon build/tests and simulated-camera rosbag2 recording/playback. See the [validation report](docs/validation.md) for evidence and the pending physical-camera checks.
+CI passed on Windows/Linux with Python 3.8, 3.10, 3.12 and 3.13. Foxy, Humble and Jazzy jobs passed colcon build/tests and simulated-camera rosbag2 recording/playback. See the [validation report](docs/validation.md) for physical Linux/Humble results, CI evidence and remaining platform limits.
 
 ## Attribution and license
 
 Original SDK implementation informed by the public [P3 protocol research by jvdillon and contributors](https://github.com/jvdillon/p3-ir-camera/blob/main/P3_PROTOCOL.md). We did not copy the upstream Python driver. Protocol field values and documented command packets are interoperability facts. See [NOTICE](NOTICE).
 
-Apache-2.0. Product names and trademarks belong to their respective owners. Pre-1.0 API changes will be documented in [CHANGELOG.md](CHANGELOG.md).
+Apache-2.0. Product names and trademarks belong to their respective owners. The documented SDK API, CLI, recording format and ROS topic/encoding contracts are stable within 1.x. Breaking changes require a new major version and will be documented in [CHANGELOG.md](CHANGELOG.md). Undocumented protocol fields, diagnostic counters and private viewer helpers are outside that stability contract.
 
-Maintained by [josepgomis](https://github.com/josepgomis). Report reproducible problems or share hardware validation through [GitHub Issues](https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk/issues). Contributions to Linux hardware testing and additional P3 firmware observations are welcome.
+Maintained by [josepgomis](https://github.com/josepgomis). Report reproducible problems or share hardware validation through [GitHub Issues](https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk/issues). Contributions to ARM64 hardware testing, physical Foxy/Jazzy validation and additional P3 firmware observations are welcome.

@@ -1,6 +1,6 @@
 # ROS 2 integration
 
-Targets: Foxy/Ubuntu 20.04, Humble/22.04 and Jazzy/24.04. All three passed container CI builds, topic/parameter/NUC tests and simulated-camera rosbag2 recording/playback; see the [validation report](validation.md). Foxy is a legacy target; its CI image and dependencies may require maintenance. Linux hardware support, including ARM64, remains unverified.
+Targets: Foxy/Ubuntu 20.04, Humble/22.04 and Jazzy/24.04. All three passed container CI builds, topic/parameter/NUC tests and simulated-camera rosbag2 recording/playback; see the [validation report](validation.md). Foxy is a legacy target; its CI image and dependencies may require maintenance. Linux x86_64 and Humble have passed physical 15-minute acceptance and reconnect tests. ARM64 and physical Foxy/Jazzy remain unverified.
 
 Use a venv with `--system-site-packages` and the same system Python as ROS. On the Ubuntu targets below, use `/usr/bin/python3` explicitly: a Conda or other Python selected by your shell may be incompatible with rclpy. This retains ROS modules, avoids modifying externally managed Python, and supplies a packaging backend that understands the SDK's pyproject metadata:
 

@@ -2,12 +2,12 @@
 
 SDK no oficial e independiente para Thermal Master P3. Python ≥3.8, Windows y Linux; visor y ROS 2 opcionales.
 
-Esta versión 0.1.0 es alpha. La P3 real ya entrega matrices e imágenes en Windows mediante WinUSB. Consulta los resultados medidos en la [validación](validation.md); las pruebas físicas en Linux y la exactitud absoluta siguen sin certificarse.
+La versión 1.0.0 estabiliza la API pública y los contratos de ROS. La P3 real ha pasado pruebas independientes de 15 minutos del SDK y ROS 2 Humble en Ubuntu 22.04 x86_64, incluida reconexión. Windows tiene evidencia física previa. Consulta la [validación](validation.md): ARM64, pruebas físicas en Foxy/Jazzy y exactitud absoluta siguen sin certificarse.
 
 Instalación directa desde GitHub (Python ≥3.8 y Git):
 
 ```sh
-python -m pip install "git+https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk.git@v0.1.0"
+python -m pip install "git+https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk.git@v1.0.0"
 p3 devices
 p3 info
 p3 capture frame.npz
@@ -27,7 +27,7 @@ with Camera() as camera:
 Para el visor:
 
 ```sh
-python -m pip install "unofficial-thermalmaster-p3[viewer] @ git+https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk.git@v0.1.0"
+python -m pip install "unofficial-thermalmaster-p3[viewer] @ git+https://github.com/josepgomis/unofficial-thermalmaster-p3-sdk.git@v1.0.0"
 p3 viewer --rotate 180
 ```
 
@@ -40,6 +40,6 @@ p3 record sessions/prueba --duration 60
 p3 replay sessions/prueba --viewer --rotate 180 --range 15 60
 ```
 
-Para probar sin cámara, descarga `p3-real-sample.zip` de la release alpha, extrae el archivo y ejecuta `p3 replay p3-real-sample --viewer --rotate 180`. Son datos reales; PyPI todavía no está publicado. Véanse [visor e imágenes](viewer.md), [ejemplos](examples.md) y [grabación/replay](recording.md).
+Para probar sin cámara, descarga `p3-real-sample.zip` de la release v1.0.0, extrae el archivo y ejecuta `p3 replay p3-real-sample --viewer --rotate 180`. Son datos reales; PyPI todavía no está publicado. Véanse [visor e imágenes](viewer.md), [ejemplos](examples.md) y [grabación/replay](recording.md).
 
 Las temperaturas no dependen de la paleta del visor. Las marcas de tiempo corresponden a recepción en el PC, no a exposición sincronizada. Consulta la [guía ROS 2](ros2.md) para Foxy, Humble y Jazzy.

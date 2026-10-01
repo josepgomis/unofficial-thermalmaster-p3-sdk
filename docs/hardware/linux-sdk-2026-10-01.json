@@ -1,114 +1,115 @@
 {
-  "started_utc": "2026-10-01T15:10:03.187351+00:00",
+  "started_utc": "2026-10-01T15:40:07.821079+00:00",
   "platform": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
   "python": "3.10.12",
   "requested_seconds": 900.0,
   "timestamp_origin": "host reception",
   "controls": [
     {
-      "elapsed_seconds": 5.031359335999923,
+      "elapsed_seconds": 5.033231809999961,
       "action": "gain_low",
       "result": "acknowledged"
     },
     {
-      "elapsed_seconds": 10.031705834999912,
+      "elapsed_seconds": 10.033125182999811,
       "action": "gain_high",
       "result": "acknowledged"
     },
     {
-      "elapsed_seconds": 20.031663175999938,
+      "elapsed_seconds": 20.033372866999798,
       "action": "nuc",
       "result": "acknowledged"
     }
   ],
   "intervals": [
     {
-      "elapsed_seconds": 60.03470213600008,
+      "elapsed_seconds": 60.03352210799994,
       "frames": 1448,
-      "average_fps": 24.119383431265504
+      "average_fps": 24.119857525518107
     },
     {
-      "elapsed_seconds": 120.07346420199997,
-      "frames": 2949,
-      "average_fps": 24.55996434848326
+      "elapsed_seconds": 120.0340831399999,
+      "frames": 2948,
+      "average_fps": 24.559691071757058
     },
     {
-      "elapsed_seconds": 180.0746269660001,
-      "frames": 4449,
-      "average_fps": 24.7064235253977
+      "elapsed_seconds": 180.0347384480001,
+      "frames": 4448,
+      "average_fps": 24.70634299993569
     },
     {
-      "elapsed_seconds": 240.0758502179999,
-      "frames": 5949,
-      "average_fps": 24.77966856973758
+      "elapsed_seconds": 240.03546977099995,
+      "frames": 5948,
+      "average_fps": 24.7796711280818
     },
     {
-      "elapsed_seconds": 300.11473289799983,
-      "frames": 7450,
-      "average_fps": 24.823839629799302
+      "elapsed_seconds": 300.03612556999997,
+      "frames": 7448,
+      "average_fps": 24.82367743501055
     },
     {
-      "elapsed_seconds": 360.15192076300013,
-      "frames": 8951,
-      "average_fps": 24.853400701117607
+      "elapsed_seconds": 360.03682405499967,
+      "frames": 8948,
+      "average_fps": 24.85301336463598
     },
     {
-      "elapsed_seconds": 420.18991186100016,
-      "frames": 10452,
-      "average_fps": 24.87446677077185
+      "elapsed_seconds": 420.03775524799994,
+      "frames": 10448,
+      "average_fps": 24.873954470667194
     },
     {
-      "elapsed_seconds": 480.22788690699986,
-      "frames": 11953,
-      "average_fps": 24.890266321236773
+      "elapsed_seconds": 480.0383859689996,
+      "frames": 11948,
+      "average_fps": 24.889676220125427
     },
     {
-      "elapsed_seconds": 540.2667375859999,
-      "frames": 13454,
-      "average_fps": 24.90251400653439
+      "elapsed_seconds": 540.0395327009996,
+      "frames": 13448,
+      "average_fps": 24.901880669254027
     },
     {
-      "elapsed_seconds": 600.3049258889998,
-      "frames": 14955,
-      "average_fps": 24.91233930465077
+      "elapsed_seconds": 600.0396943119999,
+      "frames": 14948,
+      "average_fps": 24.911685246322314
     },
     {
-      "elapsed_seconds": 660.3439356209999,
-      "frames": 16456,
-      "average_fps": 24.920346977252795
+      "elapsed_seconds": 660.0404637759998,
+      "frames": 16448,
+      "average_fps": 24.91968432647792
     },
     {
-      "elapsed_seconds": 720.3829735950001,
-      "frames": 17957,
-      "average_fps": 24.92701890271971
+      "elapsed_seconds": 720.0410337359995,
+      "frames": 17948,
+      "average_fps": 24.926357192277145
     },
     {
-      "elapsed_seconds": 780.42241283,
-      "frames": 19458,
-      "average_fps": 24.93265144633737
+      "elapsed_seconds": 780.0418058310001,
+      "frames": 19448,
+      "average_fps": 24.931997047621707
     },
     {
-      "elapsed_seconds": 840.4617134580001,
-      "frames": 20959,
-      "average_fps": 24.93748336704855
+      "elapsed_seconds": 840.0424871199998,
+      "frames": 20948,
+      "average_fps": 24.936833935409727
     }
   ],
   "max_stall_seconds": 5.0,
   "numpy": "2.2.6",
   "pyusb": "1.3.1",
-  "commit": "8ce55c7ab8da1f4bafadf529fedcc42af49211df",
+  "libusb_package": "1.0.30.0",
+  "commit": "aa1f84addebaf8caf7d3ff0a27a3948e33838903",
   "model": "P3",
   "firmware": "00.00.02.18",
-  "max_frame_gap_seconds": 1.4829766650000238,
+  "max_frame_gap_seconds": 1.4771698949998608,
   "result": "passed",
-  "elapsed_seconds": 840.4617134580001,
-  "frames": 22446,
-  "average_fps": 24.93748336704855,
+  "elapsed_seconds": 840.0424871199998,
+  "frames": 22445,
+  "average_fps": 24.936833935409727,
   "timeouts": 3,
   "corrupt_candidates": 2,
   "queue_drops": 0,
-  "counter_discontinuities": 741,
-  "seconds": 900.0010020819998,
-  "fps": 24.93997223122528,
+  "counter_discontinuities": 724,
+  "seconds": 900.0008434369997,
+  "fps": 24.938865517375657,
   "discarded_bytes": 206884
 }

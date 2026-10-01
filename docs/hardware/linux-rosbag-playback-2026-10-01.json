@@ -1,0 +1,13 @@
+{
+  "test": "physical rosbag all-topic DDS playback",
+  "ros_domain_id": "84",
+  "result": "passed",
+  "received": {
+    "raw": 248,
+    "temperature": 248,
+    "ir": 247,
+    "camera_info": 247
+  },
+  "same_header_groups_checked": 247,
+  "remaining_incomplete_groups": 1
+}
