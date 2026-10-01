@@ -1,3 +1,6 @@
+<img width="1672" height="941" alt="image" src="https://github.com/user-attachments/assets/a3f6817e-bb9f-4d19-a6da-769b10034c24" />
+
+
 # Unofficial Thermal Master P3 SDK — Python Radiometry and ROS 2
 
 Open-source Python SDK for the **Thermal Master P3 radiometric thermal camera**. Capture native temperature matrices over USB on Linux and Windows, analyze them with NumPy, inspect them in OpenCV, and publish them to ROS 2.
