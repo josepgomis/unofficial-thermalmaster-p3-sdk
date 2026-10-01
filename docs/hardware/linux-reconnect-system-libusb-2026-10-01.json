@@ -7,5 +7,7 @@
     192,
     256
   ],
-  "firmware": "00.00.02.18"
+  "firmware": "00.00.02.18",
+  "libusb_runtime": "system 1.0.25",
+  "sdk_cleanup": "release interfaces without altsetting reset"
 }
