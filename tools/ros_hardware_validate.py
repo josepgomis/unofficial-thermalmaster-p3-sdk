@@ -59,7 +59,8 @@ def main():
     Path(args.bag).parent.mkdir(parents=True, exist_ok=True)
     report = {'result': 'in_progress', 'physical': not args.simulate,
               'platform': platform.platform(), 'python': platform.python_version(),
-              'ros_distro': os.environ.get('ROS_DISTRO'), 'numpy': np.__version__,
+              'ros_distro': os.environ.get('ROS_DISTRO'),
+              'ros_domain_id': os.environ.get('ROS_DOMAIN_ID', '0'), 'numpy': np.__version__,
               'started_utc': datetime.now(timezone.utc).isoformat(),
               'requested_seconds': args.duration, 'frames': 0, 'intervals': [], 'controls': [],
               'commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'],
@@ -163,7 +164,8 @@ def main():
                 assert recorder.returncode in (0, -signal.SIGINT, 128 + signal.SIGINT)
                 recorder = None
             if elapsed - last_log >= 60:
-                report['intervals'].append({'seconds': elapsed, 'frames': report['frames']})
+                report['intervals'].append({'seconds': elapsed, 'frames': report['frames'],
+                                            'published_frames': node.frames})
                 report['max_frame_gap_seconds'] = max_gap[0]
                 if node.camera:
                     report['camera'] = {k:v for k,v in getattr(node.camera, 'info', {}).items()
@@ -176,7 +178,8 @@ def main():
                 last_log = elapsed
         assert len(report['controls']) == 3
         assert report.get('diagnostic_messages', 0) > 0
-        report.update(seconds=time.monotonic() - started,
+        report.update(published_frames=node.frames,
+                      seconds=time.monotonic() - started,
                       max_frame_gap_seconds=max_gap[0],
                       fps=report['frames'] / (time.monotonic() - started))
         assert report['frames'] > 0 and max_gap[0] <= 5

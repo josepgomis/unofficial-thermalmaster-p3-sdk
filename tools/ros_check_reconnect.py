@@ -48,7 +48,13 @@ def main():
             executor.spin_once(timeout_sec=.1)
         received.clear()
         print('UNPLUG DETECTED: reconnect P3 now.', flush=True)
-        spin_until(lambda: bool(list_devices()), 120)
+        # Observe USB presence before spinning capture again, so the reference
+        # stamp precedes every newly published frame after stream initialization.
+        deadline = time.monotonic() + 120
+        while not list_devices():
+            if time.monotonic() > deadline:
+                raise TimeoutError('P3 did not return')
+            time.sleep(.1)
         connected_stamp = node.get_clock().now().to_msg()
         connected_ns = connected_stamp.sec * 1000000000 + connected_stamp.nanosec
         spin_until(lambda: node.camera is not None and bool(received), 20)
