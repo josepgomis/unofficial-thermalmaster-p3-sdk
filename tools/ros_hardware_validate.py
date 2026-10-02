@@ -133,7 +133,9 @@ def main():
     schedule = [(5., 'gain_low'), (10., 'gain_high'), (20., 'nuc')]
     last_log = 0.
     try:
+        qos = Path(__file__).resolve().parents[1] / 'ros2/thermalmaster_p3_ros/config/rosbag_qos.yaml'
         recorder = subprocess.Popen(['ros2', 'bag', 'record', '-o', args.bag,
+            '--qos-profile-overrides-path', str(qos),
             '/thermal/raw', '/thermal/temperature', '/thermal/ir',
             '/thermal/camera_info', '/diagnostics'], start_new_session=True)
         processes.append(recorder)

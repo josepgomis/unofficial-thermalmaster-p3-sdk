@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Fix intermittent ROS Foxy rosbag recording failures by supplying explicit sensor QoS overrides in CI, physical validation and the documented recording command. Install the override with the ROS package and include it in source archives.
+- Require nonzero recorded message counts for every sensor topic in the rosbag smoke test before playback.
+
 ## 1.0.0 — 2026-10-01
 
 - Linux x86_64 SDK and ROS 2 Humble passed physical stability and functional validation, including gain/NUC, record/replay and unplug/replug checks.

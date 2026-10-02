@@ -73,12 +73,13 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python -m pytest -q ros2/thermalmaster_p3_ros/t
 The tests drive rclpy directly. Disabling third-party pytest autoload prevents old distro `launch_testing` plugins from conflicting with modern pytest; those plugins are not used by these tests.
 
 ```sh
-ros2 bag record -o p3-run /thermal/raw /thermal/temperature /thermal/ir /thermal/camera_info /diagnostics
+P3_ROSBAG_QOS="$(ros2 pkg prefix thermalmaster_p3_ros)/share/thermalmaster_p3_ros/config/rosbag_qos.yaml"
+ros2 bag record --qos-profile-overrides-path "$P3_ROSBAG_QOS" -o p3-run /thermal/raw /thermal/temperature /thermal/ir /thermal/camera_info /diagnostics
 ros2 bag info p3-run
 ros2 bag play p3-run
 ```
 
-If your recorder uses incompatible QoS, supply a QoS override with `best_effort` reliability and `volatile` durability for the four sensor topics. Do not run the live publisher on the same topics while inspecting playback.
+The installed QoS override sets `best_effort` reliability and `volatile` durability for the four sensor topics. Use it even when the recorder starts before the camera: Foxy can otherwise subscribe as `reliable` before discovering the publisher and silently omit images. If you namespace or remap the topics, update the YAML keys to their actual absolute names. Do not run the live publisher on the same topics while inspecting playback.
 
 ## Physical acceptance
 

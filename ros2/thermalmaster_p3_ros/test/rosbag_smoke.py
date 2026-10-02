@@ -4,7 +4,9 @@ import signal
 import subprocess
 import tempfile
 import time
+from pathlib import Path
 import numpy as np
+import yaml
 import rclpy
 from rclpy.executors import SingleThreadedExecutor
 from rclpy.qos import qos_profile_sensor_data
@@ -54,7 +56,9 @@ def main():
     try:
         with tempfile.TemporaryDirectory() as directory:
             bag = os.path.join(directory, 'bag')
-            record = subprocess.Popen(['ros2', 'bag', 'record', '-o', bag, '/thermal/raw',
+            qos = Path(__file__).resolve().parents[1] / 'config/rosbag_qos.yaml'
+            record = subprocess.Popen(['ros2', 'bag', 'record', '-o', bag,
+                                       '--qos-profile-overrides-path', str(qos), '/thermal/raw',
                                        '/thermal/temperature', '/thermal/ir', '/thermal/camera_info',
                                        '/diagnostics'], start_new_session=True)
             processes.append(record)
@@ -79,6 +83,11 @@ def main():
             frames.clear()
             info = subprocess.check_output(['ros2', 'bag', 'info', bag], text=True)
             assert '/thermal/raw' in info and '/thermal/temperature' in info, info
+            metadata = yaml.safe_load((Path(bag) / 'metadata.yaml').read_text())
+            counts = {item['topic_metadata']['name']: item['message_count']
+                      for item in metadata['rosbag2_bagfile_information']['topics_with_message_count']}
+            for topic in ('raw', 'temperature', 'ir', 'camera_info'):
+                assert counts.get('/thermal/' + topic, 0) > 0, counts
             play = subprocess.Popen(['ros2', 'bag', 'play', bag], start_new_session=True)
             processes.append(play)
             deadline = time.monotonic() + 20

@@ -1,7 +1,7 @@
 include LICENSE NOTICE CHANGELOG.md CONTRIBUTING.md
 recursive-include docs *.md *.png *.json
 recursive-include examples *.py
-recursive-include ros2 *.py *.xml *.cfg
+recursive-include ros2 *.py *.xml *.cfg *.yaml
 recursive-include ros2/thermalmaster_p3_ros/resource *
 recursive-include tests *.py
 recursive-include tools *.py
